@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anirudh — Mission Control</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080808;--s1:#0f0f0f;--s2:#161616;--s3:#1e1e1e;--border:#242424;--border2:#2e2e2e;--text:#efefef;--muted:#666;--muted2:#999;--acc:#f0ff44;--acc2:#44d4ff;--acc3:#ff5c38;--acc4:#b4ff9e;--acc5:#d4a3ff;--acc6:#ffb347;--red:#ff4444;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* topbar */
+.topbar{background:var(--s1);border-bottom:1px solid var(--border);padding:0.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:0.5rem;}
+.topbar-left{display:flex;align-items:center;gap:1rem;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.08em;color:var(--acc);}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--acc4);box-shadow:0 0 6px var(--acc4);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.topbar-right{display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;}
+.countdown-chip{background:var(--s3);border:1px solid var(--border2);padding:0.35rem 0.85rem;border-radius:2px;font-size:11px;letter-spacing:0.08em;}
+.countdown-chip span{color:var(--acc3);font-weight:500;}
+.tb-btn{background:none;border:1px solid var(--border2);color:var(--muted2);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:0.35rem 0.75rem;cursor:pointer;border-radius:2px;transition:all 0.15s;}
+.tb-btn:hover{border-color:var(--acc);color:var(--acc);}
+.tb-btn.blue:hover{border-color:var(--acc2);color:var(--acc2);}
+
+.main{max-width:860px;margin:0 auto;padding:2rem 1.5rem 6rem;}
+
+/* hero */
+.hero{margin-bottom:2rem;}
+.hero-eyebrow{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,7vw,5rem);line-height:0.95;letter-spacing:0.04em;}
+.hero-title em{color:var(--acc);font-style:normal;}
+.hero-sub{font-size:11px;color:var(--muted);margin-top:0.6rem;letter-spacing:0.06em;line-height:1.6;}
+
+/* weekly stats */
+.weekly-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.6rem;margin-bottom:1.5rem;}
+.wstat{background:var(--s1);border:1px solid var(--border);padding:0.75rem 1rem;border-radius:2px;}
+.wstat-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+.wstat-val{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;line-height:1;color:var(--text);}
+.wstat-sub{font-size:9px;color:var(--muted);margin-top:0.15rem;}
+.wstat-val.green{color:var(--acc4);}.wstat-val.yellow{color:var(--acc);}.wstat-val.red{color:var(--acc3);}.wstat-val.blue{color:var(--acc2);}
+
+/* pace */
+.pace-bar-wrap{margin-bottom:1.5rem;}
+.pace-label{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.06em;}
+.pace-track{background:var(--s2);border:1px solid var(--border);height:5px;border-radius:1px;overflow:hidden;}
+.pace-fill{height:100%;border-radius:1px;transition:width 0.6s ease;}
+.pace-fill.behind{background:var(--acc3);}.pace-fill.on-track{background:var(--acc);}.pace-fill.green{background:var(--acc4);}
+
+/* controls */
+.controls{display:flex;gap:0.6rem;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center;}
+.day-btn{background:var(--s1);border:1px solid var(--border);color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 1rem;cursor:pointer;border-radius:2px;transition:all 0.15s;}
+.day-btn:hover{border-color:var(--border2);color:var(--text);}
+.day-btn.active{background:var(--acc);color:#000;border-color:var(--acc);}
+.week-sel{background:var(--s1);border:1px solid var(--border);color:var(--muted2);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:0.5rem 0.75rem;border-radius:2px;outline:none;cursor:pointer;}
+
+/* trigger */
+.trigger-row{display:flex;gap:0.6rem;margin-bottom:1.5rem;}
+.trigger-input{flex:1;background:var(--s1);border:1px solid var(--border);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:0.85rem 1rem;border-radius:2px;outline:none;transition:border-color 0.15s;}
+.trigger-input:focus{border-color:var(--border2);}
+.trigger-input::placeholder{color:var(--muted);}
+.gen-btn{background:var(--acc);color:#000;border:none;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.1em;padding:0 2rem;cursor:pointer;border-radius:2px;transition:all 0.15s;white-space:nowrap;}
+.gen-btn:hover{background:#d8e83c;transform:translateY(-1px);}
+.gen-btn.loading{background:var(--s3);color:var(--muted);cursor:wait;}
+
+/* ── NEW: situation panels ─────────────────────────── */
+.situation-panel{background:var(--s1);border:1px solid var(--border);border-radius:2px;margin-bottom:1.5rem;overflow:hidden;}
+.sit-header{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.1rem;cursor:pointer;user-select:none;border-bottom:1px solid var(--border);}
+.sit-header-left{display:flex;align-items:center;gap:0.75rem;}
+.sit-icon{font-size:14px;}
+.sit-title{font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text);}
+.sit-subtitle{font-size:10px;color:var(--muted);margin-top:1px;}
+.sit-chevron{font-size:12px;color:var(--muted);transition:transform 0.2s;}
+.sit-chevron.open{transform:rotate(180deg);}
+.sit-body{padding:1rem 1.1rem;display:none;}
+.sit-body.open{display:block;}
+
+/* override input */
+.override-row{display:flex;gap:0.6rem;margin-bottom:0.6rem;}
+.override-input{flex:1;background:var(--s2);border:1px solid var(--border);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:0.65rem 0.85rem;border-radius:2px;outline:none;transition:border-color 0.15s;}
+.override-input:focus{border-color:var(--border2);}
+.override-input::placeholder{color:var(--muted);}
+.sit-btn{background:var(--s2);border:1px solid var(--border2);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:0.6rem 1rem;cursor:pointer;border-radius:2px;transition:all 0.15s;white-space:nowrap;}
+.sit-btn:hover{border-color:var(--acc);color:var(--acc);}
+.sit-btn.acc{background:var(--acc);color:#000;border-color:var(--acc);}
+.sit-btn.acc:hover{background:#d8e83c;}
+.sit-btn.danger{border-color:rgba(255,92,56,0.4);color:var(--acc3);}
+.sit-btn.danger:hover{border-color:var(--acc3);background:rgba(255,92,56,0.08);}
+.sit-btn.purple{border-color:rgba(212,163,255,0.4);color:var(--acc5);}
+.sit-btn.purple:hover{border-color:var(--acc5);}
+
+.sit-chips{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.75rem;}
+.sit-chip{background:var(--s3);border:1px solid var(--border);font-size:10px;color:var(--muted2);padding:0.3rem 0.6rem;border-radius:2px;cursor:pointer;transition:all 0.15s;letter-spacing:0.04em;}
+.sit-chip:hover{border-color:var(--border2);color:var(--text);}
+
+.sit-hint{font-size:10px;color:var(--muted);line-height:1.6;margin-bottom:0.5rem;}
+
+/* tomorrow alert */
+.tomorrow-fields{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:0.6rem;}
+.sit-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;}
+
+/* skip pattern banner */
+.skip-banner{background:rgba(255,92,56,0.06);border:1px solid rgba(255,92,56,0.2);border-left:3px solid var(--acc3);padding:0.85rem 1.1rem;border-radius:0 2px 2px 0;margin-bottom:1rem;display:none;animation:fadeUp 0.3s ease;}
+.skip-banner.visible{display:block;}
+.skip-banner-title{font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;color:var(--acc3);margin-bottom:0.25rem;}
+.skip-banner-sub{font-size:10px;color:var(--muted2);line-height:1.5;}
+.skip-banner-actions{display:flex;gap:0.5rem;margin-top:0.6rem;}
+
+/* burnout banner */
+.burnout-banner{background:rgba(212,163,255,0.06);border:1px solid rgba(212,163,255,0.2);border-left:3px solid var(--acc5);padding:0.85rem 1.1rem;border-radius:0 2px 2px 0;margin-bottom:1rem;display:none;animation:fadeUp 0.3s ease;}
+.burnout-banner.visible{display:block;}
+.burnout-title{font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;color:var(--acc5);margin-bottom:0.25rem;}
+.burnout-sub{font-size:10px;color:var(--muted2);line-height:1.5;}
+
+/* interview alert */
+.interview-alert{background:rgba(240,255,68,0.05);border:1px solid rgba(240,255,68,0.2);border-left:3px solid var(--acc);padding:0.85rem 1.1rem;border-radius:0 2px 2px 0;margin-bottom:1rem;display:none;animation:fadeUp 0.3s ease;}
+.interview-alert.visible{display:block;}
+.interview-alert-title{font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;color:var(--acc);margin-bottom:0.2rem;}
+.interview-alert-sub{font-size:10px;color:var(--muted2);}
+
+/* assessment banner */
+.assessment-banner{background:rgba(255,179,71,0.05);border:1px solid rgba(255,179,71,0.2);border-left:3px solid var(--acc6);padding:0.85rem 1.1rem;border-radius:0 2px 2px 0;margin-bottom:1rem;display:none;animation:fadeUp 0.3s ease;}
+.assessment-banner.visible{display:block;}
+.assessment-title{font-family:'IBM Plex Sans',sans-serif;font-size:0.8rem;font-weight:600;color:var(--acc6);margin-bottom:0.2rem;}
+
+/* override active banner */
+.override-active{background:rgba(68,212,255,0.05);border:1px solid rgba(68,212,255,0.2);border-left:3px solid var(--acc2);padding:0.75rem 1.1rem;border-radius:0 2px 2px 0;margin-bottom:1rem;display:none;animation:fadeUp 0.3s ease;}
+.override-active.visible{display:block;}
+.override-active-title{font-size:11px;color:var(--acc2);font-weight:500;}
+
+/* schedule */
+#schedule{display:none;}
+#schedule.visible{display:block;animation:fadeUp 0.35s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.sched-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
+.sched-date{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:0.05em;}
+.sched-meta{text-align:right;font-size:10px;color:var(--muted);letter-spacing:0.08em;line-height:1.7;}
+.prog-row{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:0.35rem;letter-spacing:0.07em;}
+.prog-track{background:var(--s2);border:1px solid var(--border);height:3px;border-radius:1px;overflow:hidden;margin-bottom:1.5rem;}
+.prog-fill{height:100%;background:var(--acc);border-radius:1px;transition:width 0.4s ease;width:0%;}
+.legend{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.25rem;}
+.leg-item{display:flex;align-items:center;gap:0.35rem;font-size:9px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+.leg-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+
+/* blocks */
+.block{background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--border);padding:1rem 1.2rem;margin-bottom:0.65rem;border-radius:0 2px 2px 0;transition:all 0.2s;}
+.block.pinned{border-color:rgba(68,212,255,0.2);box-shadow:0 0 0 1px rgba(68,212,255,0.05);}
+.block[data-cat="us-apps"]{border-left-color:var(--acc);}
+.block[data-cat="india-apps"]{border-left-color:#ff9f1c;}
+.block[data-cat="linkedin"]{border-left-color:var(--acc2);}
+.block[data-cat="india-network"]{border-left-color:var(--acc4);}
+.block[data-cat="python"]{border-left-color:var(--acc2);}
+.block[data-cat="sql"]{border-left-color:var(--acc5);}
+.block[data-cat="projects"]{border-left-color:var(--acc3);}
+.block[data-cat="stats"]{border-left-color:var(--acc6);}
+.block[data-cat="bi"]{border-left-color:var(--acc4);}
+.block[data-cat="interview"]{border-left-color:var(--acc);background:rgba(240,255,68,0.02);}
+.block[data-cat="interview"].intense{background:rgba(240,255,68,0.05);border-color:rgba(240,255,68,0.12);}
+.block[data-cat="assessment"]{border-left-color:var(--acc6);background:rgba(255,179,71,0.03);}
+.block[data-cat="weekly-review"]{border-left-color:var(--muted);}
+.block[data-cat="linkedin-audit"]{border-left-color:var(--acc2);}
+.block[data-cat="recovery"]{border-left-color:var(--acc5);background:rgba(212,163,255,0.03);}
+.block.done{opacity:0.4;border-left-color:var(--border)!important;}
+.block.done .block-title{text-decoration:line-through;color:var(--muted);}
+.block-top{display:flex;justify-content:space-between;align-items:flex-start;gap:0.75rem;margin-bottom:0.45rem;}
+.block-title{font-family:'IBM Plex Sans',sans-serif;font-size:0.87rem;font-weight:500;color:var(--text);line-height:1.3;}
+.block-right{display:flex;align-items:center;gap:0.45rem;flex-shrink:0;}
+.tag{font-size:8px;letter-spacing:0.15em;text-transform:uppercase;padding:2px 6px;border-radius:1px;font-weight:500;white-space:nowrap;}
+.tag-us-apps{background:rgba(240,255,68,0.1);color:var(--acc);}
+.tag-india-apps{background:rgba(255,159,28,0.1);color:#ff9f1c;}
+.tag-linkedin{background:rgba(68,212,255,0.1);color:var(--acc2);}
+.tag-india-network{background:rgba(180,255,158,0.1);color:var(--acc4);}
+.tag-python{background:rgba(68,212,255,0.1);color:var(--acc2);}
+.tag-sql{background:rgba(212,163,255,0.1);color:var(--acc5);}
+.tag-projects{background:rgba(255,92,56,0.1);color:var(--acc3);}
+.tag-stats{background:rgba(255,179,71,0.1);color:var(--acc6);}
+.tag-bi{background:rgba(180,255,158,0.1);color:var(--acc4);}
+.tag-interview{background:rgba(240,255,68,0.12);color:var(--acc);}
+.tag-assessment{background:rgba(255,179,71,0.12);color:var(--acc6);}
+.tag-weekly-review{background:rgba(102,102,102,0.15);color:var(--muted2);}
+.tag-linkedin-audit{background:rgba(68,212,255,0.1);color:var(--acc2);}
+.tag-recovery{background:rgba(212,163,255,0.12);color:var(--acc5);}
+.dur{font-size:10px;color:var(--muted);white-space:nowrap;}
+.check-btn{background:none;border:1px solid var(--border2);width:20px;height:20px;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;}
+.check-btn:hover{border-color:var(--acc);}
+.check-btn.checked{background:var(--acc);border-color:var(--acc);}
+.check-btn.checked::after{content:'✓';font-size:11px;color:#000;font-weight:700;}
+.block-tasks{list-style:none;margin-top:0.35rem;}
+.block-tasks li{font-size:11px;color:var(--muted2);padding:0.15rem 0 0.15rem 1rem;position:relative;line-height:1.55;}
+.block-tasks li::before{content:'›';position:absolute;left:0;color:var(--muted);}
+.block-note{margin-top:0.5rem;font-size:10px;color:var(--muted);font-style:italic;border-top:1px solid var(--border);padding-top:0.4rem;line-height:1.5;}
+.intense-badge{display:inline-block;background:var(--acc);color:#000;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;padding:1px 6px;border-radius:1px;margin-left:0.5rem;font-weight:500;vertical-align:middle;}
+.override-badge{display:inline-block;background:var(--acc2);color:#000;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:1px 6px;border-radius:1px;margin-left:0.5rem;font-weight:500;vertical-align:middle;}
+
+/* feedback badge */
+.feedback-badge{display:inline-block;background:rgba(255,92,56,0.15);color:var(--acc3);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:1px 6px;border-radius:1px;margin-left:0.5rem;font-weight:500;vertical-align:middle;border:1px solid rgba(255,92,56,0.3);}
+
+/* EOD */
+.eod-wrap{margin-top:2.5rem;border-top:1px solid var(--border);padding-top:2rem;}
+.eod-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;}
+.eod-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.eod-field{}
+.eod-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem;}
+.eod-num{width:100%;background:var(--s2);border:1px solid var(--border);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:0.6rem 0.75rem;border-radius:2px;outline:none;transition:border-color 0.15s;text-align:center;}
+.eod-num:focus{border-color:var(--acc);}
+.eod-hints{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.65rem;}
+.eod-hint{background:var(--s2);border:1px solid var(--border);font-size:10px;color:var(--muted2);padding:0.28rem 0.6rem;border-radius:2px;cursor:pointer;transition:all 0.15s;}
+.eod-hint:hover{border-color:var(--border2);color:var(--text);}
+textarea{width:100%;background:var(--s1);border:1px solid var(--border);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:0.85rem 1rem;border-radius:2px;resize:vertical;min-height:85px;outline:none;transition:border-color 0.15s;line-height:1.6;}
+textarea:focus{border-color:var(--border2);}
+textarea::placeholder{color:var(--muted);}
+
+/* feedback field */
+.feedback-field{margin-top:0.75rem;}
+.feedback-input{width:100%;background:var(--s1);border:1px solid rgba(255,92,56,0.2);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:0.75rem 1rem;border-radius:2px;outline:none;transition:border-color 0.15s;line-height:1.6;}
+.feedback-input:focus{border-color:var(--acc3);}
+.feedback-input::placeholder{color:var(--muted);}
+.eod-actions{display:flex;gap:0.6rem;margin-top:0.6rem;align-items:center;flex-wrap:wrap;}
+.eod-save-btn{background:var(--s2);border:1px solid var(--border2);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:0.6rem 1.25rem;cursor:pointer;border-radius:2px;transition:all 0.15s;}
+.eod-save-btn:hover{border-color:var(--acc);color:var(--acc);}
+.eod-saved-msg{font-size:10px;color:var(--acc4);letter-spacing:0.08em;display:none;}
+
+/* modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;align-items:center;justify-content:center;padding:1.5rem;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--s1);border:1px solid var(--border2);padding:2rem;border-radius:2px;max-width:480px;width:100%;}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.06em;margin-bottom:0.75rem;}
+.modal-sub{font-size:11px;color:var(--muted2);margin-bottom:1.25rem;line-height:1.6;}
+.modal-actions{display:flex;gap:0.6rem;flex-wrap:wrap;}
+.modal-btn{background:var(--s2);border:1px solid var(--border2);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:0.6rem 1.25rem;cursor:pointer;border-radius:2px;transition:all 0.15s;}
+.modal-btn.primary{background:var(--acc);color:#000;border-color:var(--acc);}
+.modal-btn:hover{border-color:var(--muted);}
+.modal-btn.primary:hover{background:#d8e83c;}
+#import-file{display:none;}
+
+.spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,0.2);border-top-color:#000;border-radius:50%;animation:sp 0.7s linear infinite;vertical-align:middle;margin-right:0.4rem;}
+@keyframes sp{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<!-- topbar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo">Mission Control</div>
+    <div class="status-dot"></div>
+  </div>
+  <div class="topbar-right">
+    <div class="countdown-chip">⏳ <span id="days-left">—</span> days left in US</div>
+    <button class="tb-btn" onclick="exportData()">Export ↓</button>
+    <button class="tb-btn blue" onclick="document.getElementById('modal-overlay').classList.add('open')">Import ↑</button>
+  </div>
+</div>
+
+<!-- import modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-title">Import Progress</div>
+    <div class="modal-sub">Upload your previously exported JSON file to restore your full state — curriculum position, app counts, EOD history, project rotation, and all situation flags.</div>
+    <input type="file" id="import-file" accept=".json" onchange="importData(event)">
+    <div class="modal-actions">
+      <button class="modal-btn primary" onclick="document.getElementById('import-file').click()">Choose File</button>
+      <button class="modal-btn" onclick="document.getElementById('modal-overlay').classList.remove('open')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="hero">
+    <div class="hero-eyebrow">Anirudh Raghavendra · Job Hunt + Upskill · 2-Month Sprint</div>
+    <div class="hero-title">MISSION<br><em>CONTROL</em></div>
+    <div class="hero-sub">Generate your day · Tick blocks · Log situations as they happen · Update EOD every night</div>
+  </div>
+
+  <!-- weekly stats -->
+  <div class="weekly-bar">
+    <div class="wstat"><div class="wstat-label">US Apps This Week</div><div class="wstat-val yellow" id="w-us">0</div><div class="wstat-sub">Target: 56–70</div></div>
+    <div class="wstat"><div class="wstat-label">India Apps This Week</div><div class="wstat-val blue" id="w-india">0</div><div class="wstat-sub">Target: 105–140</div></div>
+    <div class="wstat"><div class="wstat-label">LinkedIn Connects</div><div class="wstat-val" id="w-li">0</div><div class="wstat-sub">Target: 35–70</div></div>
+    <div class="wstat"><div class="wstat-label">Week</div><div class="wstat-val" id="w-week">—</div><div class="wstat-sub" id="w-week-sub">of 8</div></div>
+  </div>
+
+  <div class="pace-bar-wrap">
+    <div class="pace-label"><span>Weekly US Application Pace</span><span id="pace-pct">0%</span></div>
+    <div class="pace-track"><div class="pace-fill behind" id="pace-fill" style="width:0%"></div></div>
+  </div>
+
+  <!-- controls -->
+  <div class="controls">
+    <button class="day-btn active" data-day="weekday">Weekday</button>
+    <button class="day-btn" data-day="saturday">Saturday</button>
+    <button class="day-btn" data-day="sunday">Sunday</button>
+    <select class="week-sel" id="week-sel" onchange="setWeek(this.value)">
+      <option value="1">Week 1</option><option value="2">Week 2</option><option value="3">Week 3</option><option value="4">Week 4</option>
+      <option value="5">Week 5</option><option value="6">Week 6</option><option value="7">Week 7</option><option value="8">Week 8</option>
+    </select>
+  </div>
+
+  <div class="trigger-row">
+    <input class="trigger-input" id="trigger-input" type="text" placeholder='Type "Generate todays work" and press Enter...'>
+    <button class="gen-btn" id="gen-btn">Generate</button>
+  </div>
+
+  <!-- ══ SITUATION PANELS ══════════════════════════════════ -->
+
+  <!-- 1. Mid-day Override -->
+  <div class="situation-panel" id="panel-override">
+    <div class="sit-header" onclick="togglePanel('override')">
+      <div class="sit-header-left">
+        <span class="sit-icon">⚡</span>
+        <div><div class="sit-title">Mid-Day Override</div><div class="sit-subtitle">Something happened — reshuffle remaining blocks now</div></div>
+      </div>
+      <span class="sit-chevron" id="chev-override">▼</span>
+    </div>
+    <div class="sit-body" id="body-override">
+      <div class="sit-hint">Use this when something lands mid-day. Type what happened — the app will reprioritise the blocks you haven't ticked yet.</div>
+      <div class="sit-chips">
+        <div class="sit-chip" onclick="appendOverride('Someone messaged about my pokemon-meta-tracker project, want to prep deeply')">Pokemon project message</div>
+        <div class="sit-chip" onclick="appendOverride('Someone messaged about my collapse-signature project, want to prep deeply')">Collapse-sig message</div>
+        <div class="sit-chip" onclick="appendOverride('Someone messaged about my sales-funnel project, want to prep deeply')">Sales-funnel message</div>
+        <div class="sit-chip" onclick="appendOverride('Got a referral opportunity, need to research company and tailor resume')">Referral opportunity</div>
+        <div class="sit-chip" onclick="appendOverride('Ahead on applications, free up time for project deep-dive')">Ahead on apps</div>
+        <div class="sit-chip" onclick="appendOverride('Need extra SQL practice today')">Need SQL focus</div>
+      </div>
+      <div class="override-row">
+        <input class="override-input" id="override-input" type="text" placeholder="Describe what happened or what you need right now...">
+        <button class="sit-btn acc" onclick="applyOverride()">Apply Now</button>
+      </div>
+      <div id="override-saved" style="font-size:10px;color:var(--acc2);display:none;margin-top:0.3rem;">✓ Override applied — remaining blocks reshuffled</div>
+    </div>
+  </div>
+
+  <!-- 2. Tomorrow Alert -->
+  <div class="situation-panel" id="panel-tomorrow">
+    <div class="sit-header" onclick="togglePanel('tomorrow')">
+      <div class="sit-header-left">
+        <span class="sit-icon">📅</span>
+        <div><div class="sit-title">Tomorrow Alert</div><div class="sit-subtitle">Something happening tomorrow — prime next generation now</div></div>
+      </div>
+      <span class="sit-chevron" id="chev-tomorrow">▼</span>
+    </div>
+    <div class="sit-body" id="body-tomorrow">
+      <div class="sit-hint">Tell the app what's happening tomorrow so it generates the right schedule — don't rely on EOD keyword detection alone for time-sensitive events.</div>
+      <div class="sit-chips">
+        <div class="sit-chip" onclick="setTomorrowType('interview')">Interview / Recruiter screen</div>
+        <div class="sit-chip" onclick="setTomorrowType('technical')">Technical interview</div>
+        <div class="sit-chip" onclick="setTomorrowType('assessment')">Take-home assessment due</div>
+        <div class="sit-chip" onclick="setTomorrowType('project-call')">Project-specific call</div>
+        <div class="sit-chip" onclick="setTomorrowType('normal')">Clear — normal day</div>
+      </div>
+      <div class="tomorrow-fields">
+        <div class="eod-field">
+          <div class="sit-label">Event Type</div>
+          <input class="override-input" id="tmr-type" type="text" placeholder="e.g. Recruiter screen at Spotify" style="width:100%">
+        </div>
+        <div class="eod-field">
+          <div class="sit-label">Company (if applicable)</div>
+          <input class="override-input" id="tmr-company" type="text" placeholder="e.g. Riot Games" style="width:100%">
+        </div>
+      </div>
+      <div class="eod-field" style="margin-bottom:0.6rem;">
+        <div class="sit-label">Specific Project They Mentioned (if any)</div>
+        <input class="override-input" id="tmr-project" type="text" placeholder="e.g. pokemon-meta-tracker, sales-funnel, collapse-signature..." style="width:100%">
+      </div>
+      <button class="sit-btn acc" onclick="saveTomorrowAlert()">Set Tomorrow Alert</button>
+      <div id="tmr-saved" style="font-size:10px;color:var(--acc);display:none;margin-top:0.4rem;">✓ Alert set — tomorrow's generation will reflect this</div>
+    </div>
+  </div>
+
+  <!-- 3. Take-home Assessment -->
+  <div class="situation-panel" id="panel-assessment">
+    <div class="sit-header" onclick="togglePanel('assessment')">
+      <div class="sit-header-left">
+        <span class="sit-icon">📝</span>
+        <div><div class="sit-title">Take-Home Assessment Mode</div><div class="sit-subtitle">Got a timed assignment — clear learning blocks for focused work</div></div>
+      </div>
+      <span class="sit-chevron" id="chev-assessment">▼</span>
+    </div>
+    <div class="sit-body" id="body-assessment">
+      <div class="sit-hint">When a company sends a take-home SQL test, Python task, or case study with a deadline — activate this. Learning blocks get cleared and replaced with assessment-focused time.</div>
+      <div class="tomorrow-fields">
+        <div class="eod-field">
+          <div class="sit-label">Assessment Type</div>
+          <input class="override-input" id="asmt-type" type="text" placeholder="SQL test / Python / Case study" style="width:100%">
+        </div>
+        <div class="eod-field">
+          <div class="sit-label">Deadline (hours from now)</div>
+          <input class="override-input" id="asmt-hours" type="number" placeholder="e.g. 48" style="width:100%">
+        </div>
+      </div>
+      <div class="eod-field" style="margin-bottom:0.6rem;">
+        <div class="sit-label">Company</div>
+        <input class="override-input" id="asmt-company" type="text" placeholder="Company name" style="width:100%">
+      </div>
+      <div style="display:flex;gap:0.6rem;">
+        <button class="sit-btn acc" onclick="activateAssessment()">Activate Assessment Mode</button>
+        <button class="sit-btn danger" onclick="deactivateAssessment()">Clear Assessment Mode</button>
+      </div>
+      <div id="asmt-saved" style="font-size:10px;color:var(--acc6);display:none;margin-top:0.4rem;">✓ Assessment mode active — learning blocks cleared for focused work</div>
+    </div>
+  </div>
+
+  <!-- banners (shown when triggered) -->
+  <div class="skip-banner" id="skip-banner">
+    <div class="skip-banner-title" id="skip-banner-title">Pattern Detected — You've Skipped This 3+ Days</div>
+    <div class="skip-banner-sub" id="skip-banner-sub">The app noticed a consistent skip. Do you want to adjust this block?</div>
+    <div class="skip-banner-actions">
+      <button class="sit-btn danger" onclick="removeSkippedBlock()">Remove It</button>
+      <button class="sit-btn" onclick="reduceSkippedBlock()">Reduce to 15 min</button>
+      <button class="sit-btn" onclick="dismissSkipBanner()">Keep It</button>
+    </div>
+  </div>
+
+  <div class="burnout-banner" id="burnout-banner">
+    <div class="burnout-title">Recovery Mode — Take it easier today</div>
+    <div class="burnout-sub">Your EOD mentioned exhaustion. Today's schedule is lighter — consolidation only, no new topics, reduced blocks. Keep the applications going but give your brain a break.</div>
+  </div>
+
+  <div class="interview-alert" id="interview-alert">
+    <div class="interview-alert-title">🎯 Interview Detected — Intense Mode Active</div>
+    <div class="interview-alert-sub" id="interview-alert-sub">You reported an interview in your last EOD. Today's prep block is maxed out. Everything else scales back.</div>
+  </div>
+
+  <div class="assessment-banner" id="assessment-banner">
+    <div class="assessment-title" id="assessment-title">📝 Assessment Mode Active</div>
+    <div class="burnout-sub" id="assessment-sub">Take-home assessment in progress. Learning blocks cleared. Focus on the task.</div>
+  </div>
+
+  <div class="override-active" id="override-active-banner">
+    <div class="override-active-title" id="override-active-text">⚡ Override active — schedule adapted</div>
+  </div>
+
+  <!-- schedule -->
+  <div id="schedule">
+    <div class="sched-header">
+      <div class="sched-date" id="sched-date"></div>
+      <div class="sched-meta" id="sched-meta"></div>
+    </div>
+    <div class="prog-row"><span>Daily Progress</span><span id="prog-text">0 / 0</span></div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--acc)"></div>US Apps</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#ff9f1c"></div>India Apps</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--acc2)"></div>LinkedIn</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--acc4)"></div>India Network</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--acc5)"></div>SQL</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--acc3)"></div>Projects</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--acc6)"></div>Stats / Assessment</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--acc)"></div>Interview Prep</div>
+    </div>
+    <div id="blocks-container"></div>
+
+    <!-- EOD section -->
+    <div class="eod-wrap">
+      <div class="eod-title">End of Day Update</div>
+      <div class="eod-grid">
+        <div class="eod-field">
+          <div class="eod-label">US Apps Today</div>
+          <input class="eod-num" id="eod-us" type="number" placeholder="0" min="0">
+        </div>
+        <div class="eod-field">
+          <div class="eod-label">India Apps Today</div>
+          <input class="eod-num" id="eod-india" type="number" placeholder="0" min="0">
+        </div>
+        <div class="eod-field">
+          <div class="eod-label">LinkedIn Connects</div>
+          <input class="eod-num" id="eod-li" type="number" placeholder="0" min="0">
+        </div>
+        <div class="eod-field">
+          <div class="eod-label">Blocks Completed</div>
+          <input class="eod-num" id="eod-blocks" type="number" placeholder="0" min="0">
+        </div>
+      </div>
+      <div class="eod-hints">
+        <div class="eod-hint" onclick="appendHint('Got an interview scheduled at ')">Got interview 🎯</div>
+        <div class="eod-hint" onclick="appendHint('Struggled with ')">Struggled with...</div>
+        <div class="eod-hint" onclick="appendHint('Skipped ')">Skipped block...</div>
+        <div class="eod-hint" onclick="appendHint('Heard back from ')">Heard back</div>
+        <div class="eod-hint" onclick="appendHint('Got a take-home assessment from ')">Got assessment 📝</div>
+        <div class="eod-hint" onclick="appendHint('Feeling exhausted today, need lighter tomorrow')">Feeling burnt out</div>
+        <div class="eod-hint" onclick="appendHint('LinkedIn audit done')">Audit done</div>
+      </div>
+      <textarea id="eod-input" placeholder="What went well? What did you struggle with? Any interviews, messages, referrals, or assessments? Tomorrow adapts to this..."></textarea>
+
+      <div class="feedback-field">
+        <div class="eod-label" style="color:rgba(255,92,56,0.8);">Interview Feedback Received (if any)</div>
+        <input class="feedback-input" id="eod-feedback" type="text" placeholder="e.g. They said my SQL was weak / Couldn't explain XGBoost choice / Great culture fit, moving forward...">
+      </div>
+
+      <div class="eod-actions">
+        <button class="eod-save-btn" onclick="saveEOD()">Save EOD Update</button>
+        <div class="eod-saved-msg" id="eod-saved">✓ Saved — tomorrow adapts</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Curricula & Projects (same as v2) ─────────────────────────────
+const PYTHON=[
+  {t:"Data types, variables & control flow",d:"Lists, dicts, sets, tuples. Comprehensions. When to use which. Write 5 examples."},
+  {t:"Functions — args, kwargs, defaults, scope",d:"Write 3 functions mirroring real project logic. Understand *args and **kwargs."},
+  {t:"OOP basics — classes, __init__, methods",d:"Understand why sklearn uses class-based structure. Build a simple class."},
+  {t:"File I/O and working with CSVs manually",d:"Read/write with open(). Understand what pandas does under the hood."},
+  {t:"Error handling — try/except/finally",d:"Wrap API calls and file reads. Connect to your USGS and BLS API usage."},
+  {t:"NumPy — arrays, broadcasting, shapes",d:"Array ops, slicing, reshape. Understand why ML uses arrays not lists."},
+  {t:"Pandas Part 1 — Series, DataFrame, indexing",d:"Build a mini dataset. Slice it 5 ways. Understand iloc vs loc."},
+  {t:"Pandas Part 2 — groupby, merge, pivot, apply",d:"Replicate a transformation from your retail-segmentation project."},
+  {t:"Pandas Part 3 — cleaning, nulls, dtypes, datetime",d:"Mirror the preprocessing from your hr-attrition pipeline."},
+  {t:"Matplotlib — line, bar, scatter, subplots",d:"Recreate one chart from your projects from scratch without Plotly."},
+  {t:"Seaborn — heatmaps, distributions, pairplots",d:"Understand what Seaborn adds. Use the correlation heatmap pattern from your projects."},
+  {t:"Scikit-learn pipeline — fit/transform/predict",d:"Understand how estimators work. Build a pipeline from scratch."},
+  {t:"Feature engineering — encoding, scaling, binning",d:"Why StandardScaler? Why one-hot vs label encoding? Build examples."},
+  {t:"K-Means — how it works under the hood",d:"Implement manually step-by-step. Link to your retail-segmentation and earthquake projects."},
+  {t:"Logistic regression — math and implementation",d:"Understand sigmoid, log loss, decision boundary. Link to collapse-signature."},
+  {t:"Decision Trees & Random Forest",d:"Understand splits, Gini impurity, feature importance. Link to hr-attrition."},
+  {t:"XGBoost — gradient boosting intuition",d:"Boosting vs bagging. Why XGBoost wins. Link to pokemon-meta and flight-delay."},
+  {t:"SHAP — how it works and why it matters",d:"Understand Shapley values. Interpret your own SHAP outputs from your projects."},
+  {t:"Model evaluation — precision, recall, F1, ROC-AUC",d:"When to use which metric. Why hr-attrition tuned threshold to 0.29."},
+  {t:"Cross-validation and overfitting",d:"LOO-CV, k-fold, train/test split. Link to collapse-signature's LOO-CV choice."},
+  {t:"Isolation Forest — anomaly detection",d:"How it works. Why sampling is used. Link to earthquake and ai-smart-home."},
+  {t:"Time series — trends, seasonality, stationarity",d:"What Prophet does. Why ARIMA exists. Link to ai-smart-home."},
+  {t:"API calls — requests, JSON, pagination",d:"Understand your USGS, BLS, Open-Meteo calls line by line."},
+  {t:"SciPy stats module",d:"t-tests, z-tests, chi-square. Bridge to your A/B testing project."},
+  {t:"Statistics — distributions deep dive",d:"Normal, binomial, Poisson. When each applies. Link to A/B testing."},
+];
+const SQL=[
+  {t:"SELECT, WHERE, ORDER BY, LIMIT",d:"Write 10 queries from scratch on any dataset."},
+  {t:"Aggregations — COUNT, SUM, AVG, GROUP BY, HAVING",d:"Replicate a funnel metric from your sales-funnel project."},
+  {t:"JOINs — INNER, LEFT, RIGHT, FULL OUTER",d:"Understand what each returns. Write examples for each type."},
+  {t:"Subqueries and CTEs",d:"Rewrite a subquery as a CTE. Link to your sales-funnel and A/B testing projects."},
+  {t:"Window functions — ROW_NUMBER, RANK, LAG, LEAD",d:"Write a running total and week-over-week comparison. Link to sales-funnel."},
+  {t:"CASE statements and conditional logic",d:"Build a segmentation query. Link to ab-testing bracket logic."},
+  {t:"Date/time functions — DATE_TRUNC, EXTRACT",d:"Write time-based aggregations. Link to your funnel weekly trend queries."},
+  {t:"String functions and pattern matching",d:"LIKE, ILIKE, SPLIT_PART, CONCAT. Common in data cleaning."},
+  {t:"NULL handling — COALESCE, NULLIF, IS NULL",d:"Understand why your sales-funnel preprocessing handled 50M nulls."},
+  {t:"Indexes and query performance",d:"Understand why adding 6 indexes cut your query from 60min to 5sec."},
+  {t:"Statistical SQL — z-score, stddev, percentiles",d:"Replicate your A/B testing significance tests in SQL."},
+  {t:"LeetCode SQL Easy — 10 problems",d:"Problems: 175, 176, 182, 183, 196, 197, 511, 512, 570, 577."},
+  {t:"LeetCode SQL Medium — 10 problems",d:"Problems: 178, 180, 184, 185, 262, 550, 570, 574, 580, 584."},
+  {t:"HackerRank SQL Certification",d:"Complete Basic cert. Start Intermediate. Speed is what they test."},
+];
+const BI=[
+  {tool:"Tableau",t:"Calculated fields and LOD expressions",d:"Learn FIXED, INCLUDE, EXCLUDE. Replicate a metric from your sales-funnel dashboard."},
+  {tool:"Power BI",t:"Data model, relationships, first visual",d:"Import a CSV. Create a table relationship. Build your first visual."},
+  {tool:"Tableau",t:"Dashboard actions and interactive filters",d:"Build an interactive filter. Replicate the interactivity in your flight-delay dashboard."},
+  {tool:"Power BI",t:"DAX basics — CALCULATE, FILTER, SUMX",d:"Write 5 DAX measures. Understand why DAX is different from Excel formulas."},
+  {tool:"Tableau",t:"Table calculations — running total, percent of total",d:"Understand compute across vs down. Apply to A/B testing conversion data."},
+  {tool:"Power BI",t:"Power Query — transforming data before load",d:"Clean a messy CSV in Power Query. Understand M language basics."},
+  {tool:"Tableau",t:"Advanced charts — bullet, waterfall, Gantt",d:"Build one non-standard chart type that would stand out in a DA portfolio."},
+  {tool:"Power BI",t:"Build a report end-to-end from scratch",d:"Take one of your project CSV exports and build a complete Power BI report."},
+];
+const STATS=[
+  {t:"Hypothesis testing fundamentals",d:"Null vs alternative hypothesis, Type I & II errors, statistical power. Link to A/B testing project."},
+  {t:"p-values and significance",d:"What p=0.05 actually means. What it doesn't mean. Common misconceptions interviewers test."},
+  {t:"Confidence intervals",d:"How they're constructed. What 95% CI actually means. Link to your SQL-based CI calculations."},
+  {t:"Normal distribution deep dive",d:"Z-scores, standard normal, 68-95-99.7 rule. When to assume normality."},
+  {t:"Correlation vs causation",d:"Pearson r, Spearman r, Simpson's paradox. Why SHAP beats correlation for feature importance."},
+  {t:"Regression intuition",d:"OLS, R², residuals, multicollinearity. Why logistic regression uses log-odds."},
+  {t:"Bayesian thinking basics",d:"Prior, likelihood, posterior. Bayes' theorem. Why it matters for data analysts."},
+  {t:"Sampling and bias",d:"Random, stratified, cluster sampling. Selection bias. Link to SMOTE in hr-attrition."},
+];
+const PROJECTS=[
+  {n:"collapse-signature",w:3,tags:["SHAP","logistic regression","permutation testing","Moran's I spatial autocorrelation","NetworkX PageRank","LOO-CV (92% accuracy)"]},
+  {n:"pokemon-meta-tracker",w:3,tags:["XGBoost (ROC-AUC 0.9452)","SHAP waterfall","feature engineering","multi-class classification","ability scoring system"]},
+  {n:"flight-delay-prediction",w:3,tags:["XGBoost on 1.86M flights","SHAP","PostgreSQL feature engineering","Open-Meteo API","Tableau Public"]},
+  {n:"sales-funnel-analysis",w:3,tags:["PostgreSQL 18.3","109M rows","CTEs","window functions","LAG/LEAD","IQR outlier detection","Tableau"]},
+  {n:"hr-attrition-analysis",w:2,tags:["XGBoost + SMOTE","threshold tuning 0.50→0.29","SHAP TreeExplainer","BLS API","multi-source data merge"]},
+  {n:"retail-customer-segmentation",w:2,tags:["K-Means clustering","RFM analysis","PCA","elbow curve","62M transactions","Streamlit"]},
+  {n:"earthquake-risk-dashboard",w:2,tags:["USGS live API","K-Means hotzones","Folium + tectonic plates","baseline anomaly detection","Gutenberg-Richter"]},
+  {n:"ab-testing",w:2,tags:["PostgreSQL","z-score & p-value in SQL","confidence intervals","882K rows","Tableau Public"]},
+  {n:"ai-smart-home",w:1,tags:["Random Forest (88%)","Isolation Forest","Prophet forecasting","MQTT","IoT pipeline"]},
+  {n:"ai-stem-separator",w:1,tags:["Meta Demucs","librosa MFCC","XGBoost genre classifier","GTZAN dataset","Streamlit"]},
+];
+const INTERVIEW_PREP=[
+  {t:"Behavioural questions — STAR method",d:"Practice: 'Tell me about yourself', 'Why data analytics?', 'Biggest challenge'. Record yourself."},
+  {t:"Project walkthrough — collapse-signature",d:"Full narrative: problem → approach → findings → impact. Time yourself to 3 minutes."},
+  {t:"Project walkthrough — pokemon-meta-tracker",d:"Explain XGBoost choice, SHAP outputs, what you'd do differently. Anticipate: 'Why not Random Forest?'"},
+  {t:"Project walkthrough — sales-funnel-analysis",d:"Explain the 109M row pipeline, cart abandonment finding, and 5 business recommendations."},
+  {t:"Project walkthrough — flight-delay-prediction",d:"Explain feature engineering, why pandemic years excluded, how SHAP identified departure hour as #1."},
+  {t:"Technical SQL round practice",d:"Solve 5 LeetCode medium SQL problems under time pressure. Simulate interview conditions."},
+  {t:"Statistics interview questions",d:"Practice: explain p-value to a non-technical manager, what's overfitting, precision vs recall."},
+  {t:"Case study practice",d:"Pick a business problem (e.g. reduce churn). Walk through how you'd approach it end-to-end."},
+  {t:"Project walkthrough — hr-attrition",d:"Explain threshold tuning from 0.50 to 0.29, why recall matters more than precision in HR context."},
+  {t:"Project walkthrough — retail-segmentation",d:"Explain RFM, why k=4 over k=2, and how each segment maps to a marketing action."},
+];
+
+// ── State ──────────────────────────────────────────────────────────
+const DEFAULT_STATE={
+  startDate:(()=>{const d=new Date();d.setDate(d.getDate()+1);return d.toISOString().split('T')[0];})(),
+  currentWeek:1,
+  pythonIdx:0, sqlIdx:0, biIdx:0, statsIdx:0,
+  projectRotation:[],
+  eodHistory:[],
+  weeklyStats:{usApps:0,indiaApps:0,liConnects:0,weekStart:null},
+  linkedInAuditDone:false,
+  // new state
+  tomorrowAlert:null,       // {type, company, project}
+  assessmentMode:null,      // {type, company, hoursLeft}
+  skipCounts:{},            // {blockCat: count}
+  lastFeedback:'',          // interview feedback from EOD
+  burnoutMode:false,        // detected from EOD
+  overrideInstruction:'',   // current active override
+};
+
+let S=loadState();
+let currentDay='weekday';
+let currentSchedule=[];
+let skippedBlockCat='';
+
+function loadState(){
+  try{const r=localStorage.getItem('mc_state_v3');if(r)return{...DEFAULT_STATE,...JSON.parse(r)};}catch(e){}
+  return{...DEFAULT_STATE};
+}
+function saveState(){try{localStorage.setItem('mc_state_v3',JSON.stringify(S));}catch(e){}}
+
+async function persistSave(){try{await window.storage.set('anirudh_mc_v3',JSON.stringify(S));}catch(e){}}
+async function persistLoad(){
+  try{
+    const res=await window.storage.get('anirudh_mc_v3');
+    if(res&&res.value){S={...DEFAULT_STATE,...JSON.parse(res.value)};saveState();refreshUI();}
+  }catch(e){}
+}
+
+// ── Panel toggles ─────────────────────────────────────────────────
+function togglePanel(id){
+  const body=document.getElementById('body-'+id);
+  const chev=document.getElementById('chev-'+id);
+  const open=body.classList.toggle('open');
+  chev.classList.toggle('open',open);
+}
+
+// ── Override ──────────────────────────────────────────────────────
+function appendOverride(text){
+  const inp=document.getElementById('override-input');
+  inp.value=text; inp.focus();
+}
+
+function applyOverride(){
+  const text=document.getElementById('override-input').value.trim();
+  if(!text)return;
+  S.overrideInstruction=text;
+  saveState(); persistSave();
+  // Show active banner
+  document.getElementById('override-active-text').textContent='⚡ Override active: '+text;
+  document.getElementById('override-active-banner').classList.add('visible');
+  document.getElementById('override-saved').style.display='block';
+  document.getElementById('override-input').value='';
+  // Re-render remaining undone blocks if schedule is visible
+  if(currentSchedule.length>0) injectOverrideBlocks(text);
+  setTimeout(()=>document.getElementById('override-saved').style.display='none',3000);
+}
+
+function injectOverrideBlocks(instruction){
+  // Find first undone non-app block and inject a targeted project block
+  const lc=instruction.toLowerCase();
+  let targetProject=null;
+  PROJECTS.forEach(p=>{if(lc.includes(p.n.replace(/-/g,' '))||lc.includes(p.n))targetProject=p;});
+  if(!targetProject)PROJECTS.forEach(p=>{p.n.split('-').forEach(w=>{if(lc.includes(w)&&w.length>4)targetProject=p;});});
+
+  if(targetProject){
+    // Find first undone learning block and replace its content
+    const firstUndone=currentSchedule.findIndex(b=>!b.done&&b.cat==='projects');
+    if(firstUndone>-1){
+      currentSchedule[firstUndone].title=`OVERRIDE: Deep-dive on ${targetProject.n}`;
+      currentSchedule[firstUndone].tasks=[
+        `Someone reached out about this project — prepare to explain it cold.`,
+        `Key concepts: ${targetProject.tags.join(', ')}`,
+        `"Walk me through ${targetProject.n}" — write a 5-sentence answer. Say it out loud.`,
+        `"Why did you make X decision?" — prep for every major technical choice.`,
+        `"What would you do differently?" — have an honest, thoughtful answer.`,
+      ];
+      currentSchedule[firstUndone].note='Override block — prioritised because someone reached out about this project specifically.';
+      currentSchedule[firstUndone].isOverride=true;
+      reRenderBlock(firstUndone);
+    }
+  }
+}
+
+function reRenderBlock(idx){
+  const b=currentSchedule[idx];
+  const el=document.getElementById('block-'+idx);
+  if(!el)return;
+  const tasksHTML=(b.tasks||[]).map(t=>`<li>${t}</li>`).join('');
+  el.querySelector('.block-title').innerHTML=b.title+(b.isOverride?'<span class="override-badge">OVERRIDE</span>':'');
+  el.querySelector('.block-tasks').innerHTML=tasksHTML;
+  if(b.note)el.querySelector('.block-note').textContent=b.note;
+}
+
+// ── Tomorrow Alert ────────────────────────────────────────────────
+function setTomorrowType(type){
+  document.getElementById('tmr-type').value=
+    type==='interview'?'Recruiter / HR screen':
+    type==='technical'?'Technical interview':
+    type==='assessment'?'Take-home assessment due':
+    type==='project-call'?'Project-specific call':
+    'Normal day — clear alert';
+}
+
+function saveTomorrowAlert(){
+  const type=document.getElementById('tmr-type').value.trim();
+  const company=document.getElementById('tmr-company').value.trim();
+  const project=document.getElementById('tmr-project').value.trim();
+  if(type.toLowerCase().includes('clear')||type.toLowerCase().includes('normal')){
+    S.tomorrowAlert=null;
+  } else {
+    S.tomorrowAlert={type,company,project,set:new Date().toISOString()};
+  }
+  saveState(); persistSave();
+  document.getElementById('tmr-saved').style.display='block';
+  setTimeout(()=>document.getElementById('tmr-saved').style.display='none',3000);
+}
+
+// ── Assessment Mode ───────────────────────────────────────────────
+function activateAssessment(){
+  const type=document.getElementById('asmt-type').value.trim()||'Take-home assessment';
+  const hours=parseInt(document.getElementById('asmt-hours').value)||48;
+  const company=document.getElementById('asmt-company').value.trim()||'Company';
+  S.assessmentMode={type,company,hours,activated:new Date().toISOString()};
+  saveState(); persistSave();
+  document.getElementById('asmt-saved').style.display='block';
+  showAssessmentBanner();
+  setTimeout(()=>document.getElementById('asmt-saved').style.display='none',3000);
+}
+function deactivateAssessment(){
+  S.assessmentMode=null;
+  saveState(); persistSave();
+  document.getElementById('assessment-banner').classList.remove('visible');
+}
+function showAssessmentBanner(){
+  if(!S.assessmentMode)return;
+  const b=document.getElementById('assessment-banner');
+  document.getElementById('assessment-title').textContent=`📝 Assessment Mode Active — ${S.assessmentMode.type} for ${S.assessmentMode.company}`;
+  document.getElementById('assessment-sub').textContent=`${S.assessmentMode.hours}hr deadline. Learning blocks cleared. Focus on the task.`;
+  b.classList.add('visible');
+}
+
+// ── Skip pattern ──────────────────────────────────────────────────
+function recordSkip(cat){
+  S.skipCounts[cat]=(S.skipCounts[cat]||0)+1;
+  saveState();
+  if(S.skipCounts[cat]>=3){
+    skippedBlockCat=cat;
+    const banner=document.getElementById('skip-banner');
+    const catLabels={'india-network':'India Networking','stats':'Stats/Theory','bi':'BI Tools','sql':'SQL','python':'Python'};
+    document.getElementById('skip-banner-title').textContent=`Pattern: You've skipped "${catLabels[cat]||cat}" ${S.skipCounts[cat]} days in a row`;
+    document.getElementById('skip-banner-sub').textContent='Want to adjust this block? You can remove it, reduce it to 15 min, or keep it as is.';
+    banner.classList.add('visible');
+  }
+}
+function removeSkippedBlock(){
+  // Mark cat as suppressed for this week
+  S.skipCounts[skippedBlockCat]=-99;
+  saveState(); persistSave();
+  document.getElementById('skip-banner').classList.remove('visible');
+}
+function reduceSkippedBlock(){
+  S.skipCounts[skippedBlockCat]=-1; // signal to reduce
+  saveState(); persistSave();
+  document.getElementById('skip-banner').classList.remove('visible');
+}
+function dismissSkipBanner(){
+  S.skipCounts[skippedBlockCat]=0; // reset count
+  saveState();
+  document.getElementById('skip-banner').classList.remove('visible');
+}
+
+// ── Burnout detection ─────────────────────────────────────────────
+function detectBurnout(text){
+  const lc=text.toLowerCase();
+  return lc.includes('exhaust')||lc.includes('burnt out')||lc.includes('burnout')||
+         lc.includes('tired')||lc.includes('overwhelm')||lc.includes('burnt')||lc.includes('drained');
+}
+
+// ── Interview detection ───────────────────────────────────────────
+function detectInterview(){
+  if(S.tomorrowAlert&&(S.tomorrowAlert.type.toLowerCase().includes('interview')||S.tomorrowAlert.type.toLowerCase().includes('screen')||S.tomorrowAlert.type.toLowerCase().includes('technical')))return true;
+  if(S.eodHistory.length===0)return false;
+  const last=S.eodHistory[S.eodHistory.length-1].note.toLowerCase();
+  return last.includes('interview')||last.includes('screening')||last.includes('hr round')||last.includes('recruiter call');
+}
+
+function detectFeedbackGap(){
+  if(!S.lastFeedback)return null;
+  const lc=S.lastFeedback.toLowerCase();
+  if(lc.includes('sql'))return'sql';
+  if(lc.includes('xgboost')||lc.includes('model')||lc.includes('ml'))return'projects';
+  if(lc.includes('stat')||lc.includes('p-value')||lc.includes('distribution'))return'stats';
+  if(lc.includes('python'))return'python';
+  if(lc.includes('explain')||lc.includes('project'))return'projects';
+  return null;
+}
+
+function getNextProjects(){
+  const heavy=PROJECTS.filter(p=>p.w===3);
+  const light=PROJECTS.filter(p=>p.w<=2);
+  const used=S.projectRotation.slice(-6);
+  const h=heavy.filter(p=>!used.includes(p.n))[0]||heavy[S.projectRotation.length%heavy.length];
+  const l=light.filter(p=>!used.includes(p.n))[0]||light[S.projectRotation.length%light.length];
+  S.projectRotation=[...S.projectRotation.slice(-10),h.n,l.n];
+  return{heavy:h,light:l};
+}
+
+function getInterviewPrepDuration(week,intense){
+  if(intense)return'2.5 hrs';
+  return{1:'30 min',2:'30 min',3:'1 hr',4:'1 hr',5:'1.5 hrs',6:'1.5 hrs',7:'2 hrs',8:'2 hrs'}[week]||'1 hr';
+}
+
+// ── Build schedule ────────────────────────────────────────────────
+function buildSchedule(dayType){
+  const projects=getNextProjects();
+  const py=PYTHON[S.pythonIdx%PYTHON.length];
+  const sq=SQL[S.sqlIdx%SQL.length];
+  const bi=BI[S.biIdx%BI.length];
+  const st=STATS[S.statsIdx%STATS.length];
+  const week=parseInt(document.getElementById('week-sel').value)||S.currentWeek;
+  const intense=detectInterview();
+  const burnout=S.burnoutMode;
+  const assessment=S.assessmentMode;
+  const feedbackGap=detectFeedbackGap();
+  const tmrAlert=S.tomorrowAlert;
+  const showAudit=!S.linkedInAuditDone&&week===1;
+  const prepTopic=INTERVIEW_PREP[S.pythonIdx%INTERVIEW_PREP.length];
+
+  // Specific project from tomorrow alert
+  let tmrProject=null;
+  if(tmrAlert&&tmrAlert.project){
+    tmrProject=PROJECTS.find(p=>tmrAlert.project.toLowerCase().includes(p.n.replace(/-/g,' '))||tmrAlert.project.toLowerCase().includes(p.n));
+  }
+
+  let blocks=[];
+
+  // ── BURNOUT MODE ──────────────────────────────────────────────
+  if(burnout){
+    blocks=[
+      {cat:'us-apps',title:'US Applications — keep it going, lighter pace',dur:'1 hr',tasks:['Target: 5–6 applications. Quality over quantity today.','Focus on your top target companies only.','No pressure to hit the daily maximum.'],note:'Burnout day. Applications stay — everything else is lighter.'},
+      {cat:'india-apps',title:'India Applications — minimum viable',dur:'30 min',tasks:['Target: 8–10 applications. Quick-apply only today.'],note:''},
+      {cat:'projects',title:`Light review: ${projects.light.n}`,dur:'45 min',tasks:[`github.com/anirudh-rs/${projects.light.n}`,'Read through casually. No pressure to memorise anything.','Can you explain it in 3 sentences?'],note:'Consolidation only. No new content today.'},
+      {cat:'interview',title:`Interview Prep: ${prepTopic.t}`,dur:'30 min',tasks:['Keep it light — watch a video rather than drilling hard.','Just stay warm. No pressure today.'],note:''},
+      {cat:'stats',title:`Stats — light revision: ${st.t}`,dur:'30 min',tasks:['Re-read something you already know. Don\'t learn anything new.','Connect it to a project you already understand well.'],note:'Rest is productive. You\'ll absorb more tomorrow.'},
+    ];
+    S.burnoutMode=false; saveState();
+  }
+
+  // ── ASSESSMENT MODE ───────────────────────────────────────────
+  else if(assessment){
+    blocks=[
+      {cat:'us-apps',title:'US Applications — keep pipeline alive',dur:'45 min',tasks:['Target: 5 applications. Don\'t let the pipeline die during assessment.'],note:''},
+      {cat:'assessment',title:`Assessment Focus: ${assessment.type} — ${assessment.company}`,dur:'4 hrs',tasks:[`Deadline: ${assessment.hours} hours from activation`,`Company: ${assessment.company}`,assessment.type.toLowerCase().includes('sql')?'Focus on clean, well-commented SQL. Explain your reasoning in comments.':assessment.type.toLowerCase().includes('python')?'Write clean, modular Python. Add docstrings. Show your DA thinking.':'Read the brief twice before starting. Structure your answer like a project README.',`Apply what you know from your projects — especially ${assessment.type.toLowerCase().includes('sql')?'sales-funnel-analysis and ab-testing':'flight-delay-prediction and hr-attrition-analysis'}.`,'When done — review once, then submit. Don\'t over-polish.'],note:`This is your priority. ${assessment.company} is waiting. Show them what you built.`,intense:true},
+      {cat:'india-apps',title:'India Applications — minimum viable',dur:'30 min',tasks:['Target: 8–10 quick-apply roles. Keep India pipeline warm.'],note:''},
+    ];
+  }
+
+  // ── INTENSE MODE (interview tomorrow) ─────────────────────────
+  else if(intense){
+    const targetProj=tmrProject||projects.heavy;
+    blocks=[
+      {cat:'us-apps',title:'US Applications — keep the pipeline warm',dur:'1 hr',tasks:['Target: 5–8 applications. Don\'t stop the pipeline.','If the company interviewing tomorrow is a target — research them now.'],note:''},
+      {cat:'interview',title:`INTENSE Prep: ${tmrAlert?tmrAlert.type+' — '+(tmrAlert.company||''):'Interview Prep'}`,dur:'2.5 hrs',tasks:[
+        tmrAlert?.company?`Research ${tmrAlert.company} deeply — product, team, data stack, recent news, LinkedIn employees.`:'Research the company thoroughly before anything else.',
+        `Practice "Tell me about yourself" — tailored to this company's context.`,
+        tmrProject?`They mentioned ${tmrProject.n} — walk through it until it flows completely naturally.`:'Practice "Walk me through your strongest project" — collapse-signature or pokemon-meta-tracker.',
+        'Write down every question you can\'t answer confidently. Address each one.',
+        'Record yourself for 10 minutes. Watch it back. Fix what sounds weak.',
+      ],note:'This is the whole day\'s priority. Go get it.',intense:true},
+      {cat:'projects',title:`Deep-dive: ${targetProj.n}`,dur:'1.5 hrs',tasks:[`github.com/anirudh-rs/${targetProj.n}`,`Know cold: ${targetProj.tags.join(', ')}`,'"Walk me through this project" — time yourself to exactly 3 minutes.','"Why did you choose X?" — prep for every major decision.','"What would you do differently?" — your honest answer.'],note:''},
+      {cat:'sql',title:'SQL interview drill',dur:'45 min',tasks:['Solve 3 LeetCode medium SQL problems under time pressure.','Write clean SQL with aliases and comments — as if the interviewer can see your screen.'],note:''},
+      {cat:'india-apps',title:'India Applications',dur:'30 min',tasks:['Target: 8–10 quick-apply. Keep India pipeline running.'],note:''},
+      {cat:'linkedin',title:'LinkedIn — recruiter warm-up',dur:'20 min',tasks:['Message the interviewer or a team member at the company a warm, brief note.',`Connect with 3–5 people at ${tmrAlert?.company||'the company'} before the call.`],note:''},
+    ];
+  }
+
+  // ── NORMAL WEEKDAY ────────────────────────────────────────────
+  else if(dayType==='weekday'){
+    blocks=[
+      showAudit?{cat:'linkedin-audit',title:'LinkedIn Profile Audit (one-time, week 1)',dur:'45 min',tasks:['Headline: "Data Analyst | Python · SQL · XGBoost · Tableau · Power BI"','Add all 11 projects to Featured with live Streamlit demo links','Update skills — every library from your tech stack','Turn on Open to Work for recruiters only','Make sure your GitHub link is prominent'],note:'Do this once now. A strong profile gets inbound from recruiters.'}:null,
+      {cat:'us-apps',title:'US Job Applications — early morning',dur:'1.5 hrs',tasks:['Target: 8–10 applications. Semi-tailored — tweak 2–3 bullets per role.','Platforms: LinkedIn (posted today filter), Greenhouse, Lever, Wellfound','Priority targets today: Sportradar, Stats Perform, Riot Games, Spotify, Expedia','Log every application: company, role, date, platform, status.',feedbackGap?`Feedback noted: "${S.lastFeedback}" — flag roles that specifically value your weak area.`:''],note:'Apply first. Early applicants get seen. This is the edge.'},
+      {cat:'linkedin',title:'LinkedIn Recruiter Connections',dur:'30 min',tasks:['Connect with 5–10 hiring managers or DA/DS recruiters at target companies.','Message: 1 sentence background + 1 sentence why their company + ask for 15 min chat.','Never send blank connection requests.'],note:'5 connections/day = 35/week = compounding pipeline.'},
+      feedbackGap==='sql'?{cat:'sql',title:`SQL PRIORITY (feedback gap): ${sq.t}`,dur:'1.5 hrs',tasks:[`Topic ${S.sqlIdx+1}/${SQL.length}: ${sq.t}`,sq.d,'Extra time today because interview feedback flagged SQL as weak.','Drill until you can write clean SQL in under 8 minutes.'],note:'Feedback from your last interview flagged this. Address it now.',isFeedback:true}:
+      {cat:'python',title:`Python: ${py.t}`,dur:'1 hr',tasks:[`Topic ${S.pythonIdx+1}/${PYTHON.length}: ${py.t}`,py.d,'Write code. Don\'t just read. Implement 3 examples of your own.'],note:'Foundation. Every project you built runs on this.'},
+      {cat:'projects',title:`Project deep-dive: ${projects.heavy.n}`,dur:'1.5 hrs',tasks:[`Open: github.com/anirudh-rs/${projects.heavy.n}`,`Know these cold: ${projects.heavy.tags.join(', ')}`,'"Walk me through this project" — write a 5-sentence answer.','"Why did you choose X over Y?" — prepare for every major decision.','"What would you do differently?" — have an honest answer.'],note:'Heavy hitter. Know this project cold before any interview.'},
+      feedbackGap==='sql'?{cat:'python',title:`Python: ${py.t}`,dur:'45 min',tasks:[`Topic ${S.pythonIdx+1}/${PYTHON.length}: ${py.t}`,py.d],note:'Moved to second slot today because SQL got priority from feedback.'}:
+      {cat:'sql',title:`SQL: ${sq.t}`,dur:'45 min',tasks:[`Topic ${S.sqlIdx+1}/${SQL.length}: ${sq.t}`,sq.d,'Write every query yourself. Time yourself — aim for under 10 min per problem.'],note:'SQL is tested hard in Indian DA interviews. Build speed now.'},
+      {cat:'india-apps',title:'India Job Applications',dur:'1 hr',tasks:['Target: 15–20 applications on Naukri, LinkedIn, AngelList India.','Mix: quick-apply for volume + semi-tailored for Dream11, Flipkart, MakeMyTrip.','Reference your GitHub portfolio in every application.','Follow up on applications sent 5+ days ago.'],note:'India hiring moves fast. Follow up within 48 hours.'},
+      {cat:'india-network',title:'India Networking — referral outreach',dur:'20 min',tasks:['Message 3–4 college connections or Indian DA/DS professionals.','Ask for a referral or an intro call — not a job directly.','Even 1 referral/week dramatically increases India response rate.'],note:'Referrals bypass the ATS filter. This is how India hiring actually works.'},
+      {cat:'interview',title:`Interview Prep: ${prepTopic.t}`,dur:getInterviewPrepDuration(week,false),tasks:[prepTopic.d,`Week ${week}/8 — ${week<=2?'building foundations':week<=4?'getting sharper':week<=6?'interview-ready':'final polish mode'}`],note:`Week ${week}: ${week<=2?'Start now even if no calls yet.':week<=4?'Keep drilling. Calls should be coming.':week<=6?'You should be getting interviews.':'Final stretch.'}`},
+      {cat:'stats',title:`Stats: ${st.t}`,dur:'30 min',tasks:[st.d,'Connect to one of your 11 projects explicitly.','Plain-English explanation — as if for a non-technical manager.'],note:'This separates DA from DA who can answer "why" in interviews.'},
+    ].filter(Boolean);
+  }
+
+  // ── SATURDAY ─────────────────────────────────────────────────
+  else if(dayType==='saturday'){
+    blocks=[
+      {cat:'us-apps',title:'US Applications — Saturday push',dur:'1.5 hrs',tasks:['Target: 8–10 applications. Fewer competitors today.','Focus on your A-list: Riot Games, Spotify, Expedia, Nielsen.','Follow up on any applications from 5+ days ago.'],note:'Saturday postings are lower competition. Apply early.'},
+      {cat:'india-apps',title:'India Applications',dur:'1 hr',tasks:['Target: 15 applications on Naukri + LinkedIn.','Check for new postings from yesterday.'],note:''},
+      {cat:'projects',title:`Deep-dive: ${projects.heavy.n} (extended)`,dur:'2 hrs',tasks:[`Open: github.com/anirudh-rs/${projects.heavy.n}`,`Full tech: ${projects.heavy.tags.join(', ')}`,'"Understand every library call — what is it doing under the hood?"','Mock interview yourself out loud for 15 min. Record it.','3 potential interview questions this project generates — answer them all.'],note:'Saturday is for going deep. No rushing.'},
+      {cat:'projects',title:`Light review: ${projects.light.n}`,dur:'45 min',tasks:[`github.com/anirudh-rs/${projects.light.n}`,`Key concepts: ${projects.light.tags.slice(0,3).join(', ')}`,'3-sentence business problem explanation — out loud.','Most interesting finding — say it naturally.'],note:'Keep all 11 warm. Rotate each Saturday.'},
+      {cat:'linkedin',title:'LinkedIn & Networking — batch session',dur:'30 min',tasks:['10 recruiter connections with personalised notes.','3–4 India referral messages.','Engage with 3 posts from target companies — comment thoughtfully.'],note:'Weekend LinkedIn activity stands out. Most people go quiet.'},
+      {cat:'bi',title:`${bi.tool}: ${bi.t}`,dur:'1 hr',tasks:[`${bi.tool} topic ${S.biIdx+1}/${BI.length}: ${bi.t}`,bi.d,bi.tool==='Power BI'?'Power BI is in 70% of India DA JDs. Take this as seriously as SQL.':'Your Tableau is strong. Keep going deeper.'],note:`${bi.tool==='Power BI'?'India DA roles lean heavily Power BI.':'Tableau depth distinguishes strong DA candidates.'}`},
+      {cat:'interview',title:`Interview Prep: ${prepTopic.t}`,dur:getInterviewPrepDuration(week,false),tasks:[prepTopic.d,'Practice until it flows — not memorised, natural.'],note:''},
+    ];
+  }
+
+  // ── SUNDAY ────────────────────────────────────────────────────
+  else{
+    blocks=[
+      {cat:'weekly-review',title:'Weekly Review',dur:'30 min',tasks:['Count total US + India applications this week. On track?','Which platforms gave responses? Which didn\'t?','What did you skip and why? Is it a pattern?','Set 3 focus goals for next week.','Update your Excel tracker — all sheets.'],note:'30 minutes of review saves days of wasted effort.'},
+      {cat:'us-apps',title:'US Applications + Follow-ups',dur:'1 hr',tasks:['Apply to 5–8 US roles.','Follow up on all applications sent 5–7 days ago.','Research 3 target companies for next week.'],note:'Sunday follow-ups land in inboxes Monday morning. Strong timing.'},
+      {cat:'india-apps',title:'India Applications',dur:'45 min',tasks:['Apply to 10 India roles.','Message 2–3 Indian connections for referrals.'],note:''},
+      {cat:'python',title:`Python review: ${py.t}`,dur:'1 hr',tasks:[`Revisit topic ${S.pythonIdx+1}/${PYTHON.length}`,py.d,'Read through one notebook from any project and annotate what each line does.','Build one small exercise connecting this topic to a real project.'],note:'Sundays: consolidation, not new content.'},
+      {cat:'projects',title:`Light review: ${projects.light.n}`,dur:'30 min',tasks:[`github.com/anirudh-rs/${projects.light.n}`,`Focus on: ${projects.light.tags.slice(0,2).join(' and ')}`,'3-sentence explanation — can you do it without looking?'],note:''},
+      {cat:'interview',title:`Interview Prep: ${prepTopic.t}`,dur:getInterviewPrepDuration(week,false),tasks:[prepTopic.d,'Lighter touch — watch a video if drilling feels heavy.','Write 2 things you now understand that you didn\'t last week.'],note:''},
+    ];
+  }
+
+  return{blocks,projects,py,sq,bi,st,week,intense,burnout,assessment};
+}
+
+// ── Render ─────────────────────────────────────────────────────────
+function renderSchedule(data){
+  const{blocks,week,intense,burnout,assessment}=data;
+  currentSchedule=blocks.map((b,i)=>({...b,id:i,done:false}));
+
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const now=new Date();
+  document.getElementById('sched-date').textContent=`${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
+  const totalHrs=currentDay==='weekday'?'~8 hrs':currentDay==='saturday'?'~7 hrs':'~4.5 hrs';
+  document.getElementById('sched-meta').innerHTML=`${currentDay.toUpperCase()} · WEEK ${week}/8<br>${totalHrs} total${burnout?' · RECOVERY MODE':''}${assessment?' · ASSESSMENT MODE':''}`;
+
+  // Banners
+  document.getElementById('interview-alert').classList.toggle('visible',intense&&!burnout&&!assessment);
+  document.getElementById('burnout-banner').classList.toggle('visible',burnout);
+  if(assessment)showAssessmentBanner();
+  if(S.overrideInstruction){
+    document.getElementById('override-active-text').textContent='⚡ Override active: '+S.overrideInstruction;
+    document.getElementById('override-active-banner').classList.add('visible');
+  }
+
+  const tagLabels={'us-apps':'US Apps','india-apps':'India Apps','linkedin':'LinkedIn','india-network':'India Network','python':'Python','sql':'SQL','projects':'Project','stats':'Stats','bi':'BI Tools','interview':'Interview Prep','assessment':'Assessment','weekly-review':'Weekly Review','linkedin-audit':'LinkedIn Audit','recovery':'Recovery'};
+  let html='';
+  currentSchedule.forEach((b,i)=>{
+    const tl=tagLabels[b.cat]||b.cat;
+    const isPin=b.isOverride;
+    html+=`<div class="block${b.intense?' intense':''}${isPin?' pinned':''}" data-cat="${b.cat}" id="block-${i}">
+      <div class="block-top">
+        <div class="block-title">${b.title}${b.intense?'<span class="intense-badge">INTENSE</span>':''}${b.isOverride?'<span class="override-badge">OVERRIDE</span>':''}${b.isFeedback?'<span class="feedback-badge">FEEDBACK GAP</span>':''}</div>
+        <div class="block-right">
+          <span class="tag tag-${b.cat}">${tl}</span>
+          <span class="dur">${b.dur}</span>
+          <button class="check-btn" id="check-${i}" onclick="toggleBlock(${i})"></button>
+        </div>
+      </div>
+      <ul class="block-tasks">${(b.tasks||[]).filter(Boolean).map(t=>`<li>${t}</li>`).join('')}</ul>
+      ${b.note?`<div class="block-note">${b.note}</div>`:''}
+    </div>`;
+  });
+  document.getElementById('blocks-container').innerHTML=html;
+  updateProgress();
+
+  const sch=document.getElementById('schedule');
+  sch.style.display='block';
+  sch.classList.add('visible');
+  setTimeout(()=>sch.scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+
+function toggleBlock(i){
+  currentSchedule[i].done=!currentSchedule[i].done;
+  const b=currentSchedule[i];
+  document.getElementById(`block-${i}`).classList.toggle('done',b.done);
+  document.getElementById(`check-${i}`).classList.toggle('checked',b.done);
+  // If marked undone (skipped at end of day) — record
+  if(!b.done) recordSkip(b.cat);
+  updateProgress();
+}
+
+function updateProgress(){
+  const total=currentSchedule.length;
+  const done=currentSchedule.filter(b=>b.done).length;
+  const pct=total>0?(done/total)*100:0;
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=`${done} / ${total} blocks`;
+}
+
+// ── Generate ───────────────────────────────────────────────────────
+function generate(){
+  const btn=document.getElementById('gen-btn');
+  btn.classList.add('loading');
+  btn.innerHTML='<span class="spin"></span>Building...';
+  // Clear override after generating
+  S.overrideInstruction='';
+  document.getElementById('override-active-banner').classList.remove('visible');
+
+  setTimeout(()=>{
+    const data=buildSchedule(currentDay);
+    renderSchedule(data);
+    S.pythonIdx=(S.pythonIdx+1)%PYTHON.length;
+    S.sqlIdx=(S.sqlIdx+1)%SQL.length;
+    S.biIdx=(S.biIdx+1)%BI.length;
+    S.statsIdx=(S.statsIdx+1)%STATS.length;
+    S.currentWeek=parseInt(document.getElementById('week-sel').value)||S.currentWeek;
+    // Clear tomorrow alert after consuming it
+    if(S.tomorrowAlert)S.tomorrowAlert=null;
+    saveState(); persistSave();
+    btn.classList.remove('loading');
+    btn.innerHTML='Generate';
+    document.getElementById('trigger-input').value='';
+  },700);
+}
+
+// ── EOD ────────────────────────────────────────────────────────────
+function saveEOD(){
+  const text=document.getElementById('eod-input').value.trim();
+  if(!text)return;
+  const usVal=parseInt(document.getElementById('eod-us').value)||0;
+  const indiaVal=parseInt(document.getElementById('eod-india').value)||0;
+  const liVal=parseInt(document.getElementById('eod-li').value)||0;
+  const feedback=document.getElementById('eod-feedback').value.trim();
+
+  S.weeklyStats.usApps+=usVal;
+  S.weeklyStats.indiaApps+=indiaVal;
+  S.weeklyStats.liConnects+=liVal;
+
+  if(text.toLowerCase().includes('linkedin audit')||text.toLowerCase().includes('audit done'))S.linkedInAuditDone=true;
+  if(detectBurnout(text))S.burnoutMode=true;
+  if(feedback)S.lastFeedback=feedback;
+
+  // Skip detection from EOD text
+  const skipKeywords=['skipped','didn\'t do','didn\'t touch','missed','no time for'];
+  const cats=['india-network','stats','bi','sql','python'];
+  cats.forEach(cat=>{
+    const catWords=cat.replace(/-/g,' ');
+    if(skipKeywords.some(kw=>text.toLowerCase().includes(kw)&&text.toLowerCase().includes(catWords))){
+      recordSkip(cat);
+    }
+  });
+
+  S.eodHistory.push({date:new Date().toISOString(),note:text,us:usVal,india:indiaVal,li:liVal,feedback});
+  if(S.eodHistory.length>60)S.eodHistory=S.eodHistory.slice(-60);
+  saveState(); persistSave();
+  updateWeeklyStats();
+
+  document.getElementById('eod-saved').style.display='block';
+  document.getElementById('eod-input').value='';
+  document.getElementById('eod-us').value='';
+  document.getElementById('eod-india').value='';
+  document.getElementById('eod-li').value='';
+  document.getElementById('eod-blocks').value='';
+  document.getElementById('eod-feedback').value='';
+  setTimeout(()=>document.getElementById('eod-saved').style.display='none',3000);
+}
+
+function appendHint(text){
+  const ta=document.getElementById('eod-input');
+  ta.value+=(ta.value&&!ta.value.endsWith(' ')?'\n':'')+text;
+  ta.focus();
+}
+
+// ── Stats & countdown ─────────────────────────────────────────────
+function updateWeeklyStats(){
+  document.getElementById('w-us').textContent=S.weeklyStats.usApps;
+  document.getElementById('w-india').textContent=S.weeklyStats.indiaApps;
+  document.getElementById('w-li').textContent=S.weeklyStats.liConnects;
+  const week=parseInt(document.getElementById('week-sel').value)||S.currentWeek;
+  document.getElementById('w-week').textContent=`W${week}`;
+  const usPct=Math.min(Math.round((S.weeklyStats.usApps/63)*100),100);
+  const pf=document.getElementById('pace-fill');
+  pf.style.width=usPct+'%';
+  pf.className='pace-fill '+(usPct>=100?'green':usPct>=70?'on-track':'behind');
+  document.getElementById('pace-pct').textContent=usPct+'%';
+  const start=new Date(S.startDate);
+  const deadline=new Date(start);deadline.setDate(deadline.getDate()+60);
+  const daysLeft=Math.max(0,Math.ceil((deadline-new Date())/(1000*60*60*24)));
+  document.getElementById('days-left').textContent=daysLeft;
+  const usEl=document.getElementById('w-us');
+  usEl.className='wstat-val '+(S.weeklyStats.usApps>=63?'green':S.weeklyStats.usApps>=40?'yellow':'red');
+}
+
+function setWeek(w){S.currentWeek=parseInt(w);saveState();updateWeeklyStats();}
+
+function exportData(){
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`mission-control-v3-${new Date().toISOString().split('T')[0]}.json`;
+  a.click();URL.revokeObjectURL(url);
+}
+
+function importData(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      S={...DEFAULT_STATE,...JSON.parse(ev.target.result)};
+      saveState();persistSave();refreshUI();
+      document.getElementById('modal-overlay').classList.remove('open');
+      alert('Progress restored successfully!');
+    }catch(err){alert('Invalid file.');}
+  };
+  reader.readAsText(file);
+}
+
+function refreshUI(){
+  updateWeeklyStats();
+  document.getElementById('week-sel').value=S.currentWeek;
+  if(S.assessmentMode)showAssessmentBanner();
+  if(S.burnoutMode)document.getElementById('burnout-banner').classList.add('visible');
+}
+
+function checkWeekReset(){
+  const now=new Date();
+  const weekStart=new Date(S.weeklyStats.weekStart||S.startDate);
+  if(Math.floor((now-weekStart)/(1000*60*60*24))>=7){
+    S.weeklyStats={usApps:0,indiaApps:0,liConnects:0,weekStart:now.toISOString().split('T')[0]};
+    S.currentWeek=Math.min(S.currentWeek+1,8);
+    S.skipCounts={};
+    document.getElementById('week-sel').value=S.currentWeek;
+    saveState();persistSave();
+  }
+}
+
+// ── Init ───────────────────────────────────────────────────────────
+document.querySelectorAll('.day-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentDay=btn.dataset.day;
+  });
+});
+document.getElementById('trigger-input').addEventListener('keydown',e=>{if(e.key==='Enter')generate();});
+document.getElementById('gen-btn').addEventListener('click',generate);
+document.getElementById('override-input').addEventListener('keydown',e=>{if(e.key==='Enter')applyOverride();});
+
+checkWeekReset();
+refreshUI();
+persistLoad();
+</script>
+</body>
+</html>
