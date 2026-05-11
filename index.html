@@ -251,6 +251,7 @@ textarea::placeholder{color:var(--muted);}
     <div class="countdown-chip">⏳ <span id="days-left">—</span> days left in US</div>
     <button class="tb-btn" onclick="exportData()">Export ↓</button>
     <button class="tb-btn blue" onclick="document.getElementById('modal-overlay').classList.add('open')">Import ↑</button>
+    <button class="tb-btn" style="border-color:rgba(255,92,56,0.4);color:#ff5c38;" onclick="resetClock()">Reset Clock</button>
   </div>
 </div>
 
@@ -1119,6 +1120,17 @@ function checkWeekReset(){
     document.getElementById('week-sel').value=S.currentWeek;
     saveState();persistSave();
   }
+}
+
+// ── Reset Clock ──────────────────────────────────────────────────────
+function resetClock(){
+  if(!confirm("Reset the 60-day countdown to start from 12 May 2026? Your curriculum progress, EOD history and project rotation will be kept."))return;
+  S.startDate="2026-05-12";
+  S.currentWeek=1;
+  S.weeklyStats={usApps:0,indiaApps:0,liConnects:0,weekStart:"2026-05-12"};
+  document.getElementById("week-sel").value=1;
+  saveState();persistSave();updateWeeklyStats();
+  alert("Clock reset! Countdown now starts from 12 May 2026.");
 }
 
 // ── Init ───────────────────────────────────────────────────────────
