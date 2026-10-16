@@ -19,22 +19,18 @@ body{background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospac
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.03;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
-/* ── TOPBAR ── */
+/* TOPBAR */
 .topbar{background:var(--s1);border-bottom:1px solid var(--border);padding:0.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:0.5rem;}
 .topbar-left{display:flex;align-items:center;gap:1rem;}
 .logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.08em;color:var(--acc);}
 .pulse{width:7px;height:7px;border-radius:50%;background:var(--acc4);box-shadow:0 0 6px var(--acc4);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 .topbar-right{display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;}
-.chip{background:var(--s3);border:1px solid var(--border2);padding:0.35rem 0.85rem;border-radius:2px;font-size:11px;letter-spacing:0.06em;}
-.chip span{color:var(--acc3);font-weight:600;}
 .tb-btn{background:none;border:1px solid var(--border2);color:var(--muted2);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:0.35rem 0.75rem;cursor:pointer;border-radius:2px;transition:all 0.15s;}
 .tb-btn:hover{border-color:var(--acc);color:var(--acc);}
-.tb-btn.red{color:var(--acc3);border-color:rgba(255,92,56,0.35);}
-.tb-btn.red:hover{border-color:var(--acc3);background:rgba(255,92,56,0.06);}
 .tb-btn.blue:hover{border-color:var(--acc2);color:var(--acc2);}
 
-/* ── MODAL ── */
+/* MODAL */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;align-items:center;justify-content:center;padding:1.5rem;}
 .overlay.open{display:flex;}
 .modal{background:var(--s1);border:1px solid var(--border2);padding:2rem;border-radius:2px;max-width:460px;width:100%;}
@@ -47,24 +43,25 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .m-btn.primary:hover{background:#d8e83c;}
 #import-file{display:none;}
 
-/* ── MAIN ── */
+/* MAIN */
 .main{max-width:860px;margin:0 auto;padding:2rem 1.5rem 6rem;}
 
+/* HERO */
 .hero{margin-bottom:2rem;}
 .eyebrow{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,7vw,5rem);line-height:0.95;letter-spacing:0.03em;}
 .hero-title em{color:var(--acc);font-style:normal;}
 .hero-sub{font-size:11px;color:var(--muted);margin-top:0.6rem;line-height:1.6;}
 
-/* ── WEEKLY STATS ── */
-.wbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0.6rem;margin-bottom:1.5rem;}
+/* WEEKLY STATS */
+.wbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.6rem;margin-bottom:1.5rem;}
 .wstat{background:var(--s1);border:1px solid var(--border);padding:0.75rem 1rem;border-radius:2px;}
 .wstat-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
 .wstat-val{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;line-height:1;}
 .wstat-sub{font-size:9px;color:var(--muted);margin-top:0.15rem;}
 .c-yellow{color:var(--acc);}.c-blue{color:var(--acc2);}.c-green{color:var(--acc4);}.c-red{color:var(--acc3);}.c-white{color:var(--text);}
 
-/* ── PACE ── */
+/* PACE */
 .pace-wrap{margin-bottom:1.5rem;}
 .pace-label{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:0.4rem;}
 .pace-track{background:var(--s2);border:1px solid var(--border);height:5px;border-radius:1px;overflow:hidden;}
@@ -72,14 +69,14 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .pace-fill.ok{background:var(--acc);}
 .pace-fill.good{background:var(--acc4);}
 
-/* ── CONTROLS ── */
+/* CONTROLS */
 .controls{display:flex;gap:0.6rem;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center;}
 .day-btn{background:var(--s1);border:1px solid var(--border);color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 1rem;cursor:pointer;border-radius:2px;transition:all 0.15s;}
 .day-btn:hover{color:var(--text);border-color:var(--border2);}
 .day-btn.active{background:var(--acc);color:#000;border-color:var(--acc);}
 .week-sel{background:var(--s1);border:1px solid var(--border);color:var(--muted2);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:0.5rem 0.75rem;border-radius:2px;outline:none;cursor:pointer;}
 
-/* ── TRIGGER ── */
+/* TRIGGER */
 .trigger-row{display:flex;gap:0.6rem;margin-bottom:1.5rem;}
 .trigger-input{flex:1;background:var(--s1);border:1px solid var(--border);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:0.85rem 1rem;border-radius:2px;outline:none;transition:border-color 0.15s;}
 .trigger-input:focus{border-color:var(--border2);}
@@ -88,10 +85,9 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .gen-btn:hover{background:#d8e83c;}
 .gen-btn.loading{background:var(--s3);color:var(--muted);cursor:wait;}
 
-/* ── SITUATION PANELS ── */
+/* SITUATION PANELS */
 .sit-panel{background:var(--s1);border:1px solid var(--border);border-radius:2px;margin-bottom:1rem;overflow:hidden;}
-.sit-head{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.1rem;cursor:pointer;user-select:none;border-bottom:1px solid transparent;transition:border-color 0.15s;}
-.sit-head:hover{border-bottom-color:var(--border);}
+.sit-head{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.1rem;cursor:pointer;user-select:none;}
 .sit-head-left{display:flex;align-items:center;gap:0.75rem;}
 .sit-icon{font-size:14px;}
 .sit-title{font-family:'IBM Plex Sans',sans-serif;font-size:0.82rem;font-weight:600;color:var(--text);}
@@ -109,7 +105,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .sit-input:focus{border-color:var(--border2);}
 .sit-input::placeholder{color:var(--muted);}
 .sit-input.full{width:100%;}
-.sit-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;margin-top:0.5rem;}
+.sit-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;margin-top:0.5rem;display:block;}
 .sit-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:0.5rem;}
 .s-btn{background:var(--s2);border:1px solid var(--border2);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:0.55rem 1rem;cursor:pointer;border-radius:2px;transition:all 0.15s;white-space:nowrap;}
 .s-btn:hover{border-color:var(--acc);color:var(--acc);}
@@ -117,15 +113,15 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .s-btn.acc:hover{background:#d8e83c;}
 .s-btn.danger{color:var(--acc3);border-color:rgba(255,92,56,0.35);}
 .s-btn.danger:hover{border-color:var(--acc3);}
-.sit-confirm{font-size:10px;margin-top:0.4rem;display:none;}
+.sit-confirm{font-size:10px;margin-top:0.5rem;display:none;padding:0.3rem 0;}
 .sit-confirm.show{display:block;}
 .sit-confirm.green{color:var(--acc4);}
 .sit-confirm.blue{color:var(--acc2);}
 .sit-confirm.amber{color:var(--acc6);}
 
-/* ── BANNERS ── */
-.banner{padding:0.85rem 1.1rem;border-radius:0 2px 2px 0;margin-bottom:1rem;display:none;animation:fadeUp 0.3s ease;border-left-width:3px;border-left-style:solid;}
-.banner.show{display:block;}
+/* BANNERS */
+.banner{padding:0.85rem 1.1rem;border-radius:0 2px 2px 0;margin-bottom:1rem;display:none;border-left-width:3px;border-left-style:solid;}
+.banner.show{display:block;animation:fadeUp 0.3s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .banner.yellow{background:rgba(240,255,68,0.04);border:1px solid rgba(240,255,68,0.18);border-left-color:var(--acc);}
 .banner.purple{background:rgba(212,163,255,0.04);border:1px solid rgba(212,163,255,0.18);border-left-color:var(--acc5);}
@@ -136,7 +132,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .banner-sub{font-size:10px;color:var(--muted2);line-height:1.5;}
 .banner-actions{display:flex;gap:0.5rem;margin-top:0.6rem;}
 
-/* ── SCHEDULE ── */
+/* SCHEDULE */
 #schedule{display:none;}
 #schedule.show{display:block;animation:fadeUp 0.35s ease;}
 .sched-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
@@ -149,10 +145,10 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .leg{display:flex;align-items:center;gap:0.35rem;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
 .leg-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
 
-/* ── BLOCKS ── */
+/* BLOCKS */
 .block{background:var(--s1);border:1px solid var(--border);border-left:3px solid var(--border);padding:1rem 1.2rem;margin-bottom:0.65rem;border-radius:0 2px 2px 0;transition:opacity 0.2s;}
-.block[data-cat="us-apps"]{border-left-color:var(--acc);}
-.block[data-cat="india-apps"]{border-left-color:#ff9f1c;}
+.block[data-cat="india-apps"]{border-left-color:var(--acc);}
+.block[data-cat="us-apps"]{border-left-color:#ff9f1c;}
 .block[data-cat="linkedin"]{border-left-color:var(--acc2);}
 .block[data-cat="india-network"]{border-left-color:var(--acc4);}
 .block[data-cat="python"]{border-left-color:var(--acc2);}
@@ -171,8 +167,8 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .block-title{font-family:'IBM Plex Sans',sans-serif;font-size:0.87rem;font-weight:500;line-height:1.3;}
 .block-right{display:flex;align-items:center;gap:0.45rem;flex-shrink:0;}
 .tag{font-size:8px;letter-spacing:0.14em;text-transform:uppercase;padding:2px 6px;border-radius:1px;font-weight:500;white-space:nowrap;}
-.tag-us-apps{background:rgba(240,255,68,0.1);color:var(--acc);}
-.tag-india-apps{background:rgba(255,159,28,0.1);color:#ff9f1c;}
+.tag-india-apps{background:rgba(240,255,68,0.1);color:var(--acc);}
+.tag-us-apps{background:rgba(255,159,28,0.1);color:#ff9f1c;}
 .tag-linkedin{background:rgba(68,212,255,0.1);color:var(--acc2);}
 .tag-india-network{background:rgba(180,255,158,0.1);color:var(--acc4);}
 .tag-python{background:rgba(68,212,255,0.1);color:var(--acc2);}
@@ -199,12 +195,11 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .badge-override{background:var(--acc2);color:#000;}
 .badge-feedback{background:rgba(255,92,56,0.15);color:var(--acc3);border:1px solid rgba(255,92,56,0.3);}
 
-/* ── EOD ── */
+/* EOD */
 .eod-wrap{margin-top:2.5rem;border-top:1px solid var(--border);padding-top:2rem;}
 .eod-section-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
-.eod-nums{display:grid;grid-template-columns:repeat(4,1fr);gap:0.6rem;margin-bottom:1rem;}
-.eod-field{}
-.eod-field-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;}
+.eod-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem;margin-bottom:1rem;}
+.eod-field-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;display:block;}
 .eod-num-input{width:100%;background:var(--s2);border:1px solid var(--border);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:14px;padding:0.6rem 0.75rem;border-radius:2px;outline:none;text-align:center;transition:border-color 0.15s;}
 .eod-num-input:focus{border-color:var(--acc);}
 .eod-hint-chips{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.65rem;}
@@ -213,7 +208,8 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .eod-textarea{width:100%;background:var(--s1);border:1px solid var(--border);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:0.85rem 1rem;border-radius:2px;resize:vertical;min-height:85px;outline:none;transition:border-color 0.15s;line-height:1.6;display:block;}
 .eod-textarea:focus{border-color:var(--border2);}
 .eod-textarea::placeholder{color:var(--muted);}
-.eod-feedback-input{width:100%;background:var(--s1);border:1px solid rgba(255,92,56,0.25);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:0.7rem 1rem;border-radius:2px;outline:none;transition:border-color 0.15s;line-height:1.6;display:block;margin-top:0.75rem;}
+.eod-feedback-label{font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,92,56,0.7);margin-bottom:0.3rem;margin-top:0.75rem;display:block;}
+.eod-feedback-input{width:100%;background:var(--s1);border:1px solid rgba(255,92,56,0.25);color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:0.7rem 1rem;border-radius:2px;outline:none;transition:border-color 0.15s;line-height:1.6;display:block;}
 .eod-feedback-input:focus{border-color:var(--acc3);}
 .eod-feedback-input::placeholder{color:var(--muted);}
 .eod-actions{display:flex;align-items:center;gap:1rem;margin-top:0.75rem;flex-wrap:wrap;}
@@ -221,7 +217,6 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 .eod-save-btn:hover{border-color:var(--acc);color:var(--acc);}
 #eod-confirm{font-size:11px;color:var(--acc4);letter-spacing:0.06em;display:none;}
 
-/* ── SPINNER ── */
 .spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,0.2);border-top-color:#000;border-radius:50%;animation:sp 0.7s linear infinite;vertical-align:middle;margin-right:0.4rem;}
 @keyframes sp{to{transform:rotate(360deg);}}
 </style>
@@ -235,10 +230,8 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
     <div class="pulse"></div>
   </div>
   <div class="topbar-right">
-    <div class="chip">⏳ <span id="days-left">—</span> days left in US</div>
     <button class="tb-btn" onclick="exportData()">Export ↓</button>
     <button class="tb-btn blue" onclick="document.getElementById('import-overlay').classList.add('open')">Import ↑</button>
-    <button class="tb-btn red" onclick="resetClock()">Reset Clock</button>
   </div>
 </div>
 
@@ -259,27 +252,27 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
   <!-- HERO -->
   <div class="hero">
-    <div class="eyebrow">Anirudh Raghavendra · Job Hunt + Upskill · 61-Day Sprint</div>
+    <div class="eyebrow">Anirudh Raghavendra · Daily Task Generator</div>
     <div class="hero-title">MISSION<br><em>CONTROL</em></div>
-    <div class="hero-sub">Generate your day · Tick blocks · Log situations as they happen · Update EOD every night</div>
+    <div class="hero-sub">Generate your day · Tick blocks as you go · Update EOD every night · Tomorrow adapts</div>
   </div>
 
   <!-- WEEKLY STATS -->
   <div class="wbar">
     <div class="wstat">
-      <div class="wstat-label">US Apps This Week</div>
-      <div class="wstat-val c-yellow" id="w-us">0</div>
-      <div class="wstat-sub">Target: 56–70</div>
-    </div>
-    <div class="wstat">
       <div class="wstat-label">India Apps This Week</div>
-      <div class="wstat-val c-blue" id="w-india">0</div>
-      <div class="wstat-sub">Target: 105–140</div>
+      <div class="wstat-val c-yellow" id="w-india">0</div>
+      <div class="wstat-sub">Target: 60–80 / week</div>
     </div>
     <div class="wstat">
       <div class="wstat-label">LinkedIn Connects</div>
-      <div class="wstat-val c-white" id="w-li">0</div>
-      <div class="wstat-sub">Target: 35–70</div>
+      <div class="wstat-val c-blue" id="w-li">0</div>
+      <div class="wstat-sub">Target: 35–50 / week</div>
+    </div>
+    <div class="wstat">
+      <div class="wstat-label">US Remote Apps</div>
+      <div class="wstat-val c-white" id="w-us">0</div>
+      <div class="wstat-sub">Secondary</div>
     </div>
     <div class="wstat">
       <div class="wstat-label">Current Week</div>
@@ -290,7 +283,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
   <!-- PACE -->
   <div class="pace-wrap">
-    <div class="pace-label"><span>Weekly US Pace</span><span id="pace-pct">0%</span></div>
+    <div class="pace-label"><span>India Application Pace</span><span id="pace-pct">0%</span></div>
     <div class="pace-track"><div class="pace-fill" id="pace-fill" style="width:0%"></div></div>
   </div>
 
@@ -313,7 +306,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
     <button class="gen-btn" id="gen-btn">Generate</button>
   </div>
 
-  <!-- ══ SITUATION PANELS ══ -->
+  <!-- SITUATION PANELS -->
 
   <!-- 1. Mid-day Override -->
   <div class="sit-panel">
@@ -325,14 +318,14 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
       <span class="sit-chev" id="chev-override">▼</span>
     </div>
     <div class="sit-body" id="body-override">
-      <div class="sit-hint-text">Type what happened and hit Apply. Remaining undone blocks will reshuffle around it.</div>
+      <div class="sit-hint-text">Type what happened and hit Apply. Remaining undone blocks reshuffle around it immediately.</div>
       <div class="chips">
-        <div class="chip-btn" onclick="setOverrideText('Someone messaged about my pokemon-meta-tracker, need to prep it deeply')">Pokemon message</div>
-        <div class="chip-btn" onclick="setOverrideText('Someone messaged about my collapse-signature project, need to prep it deeply')">Collapse-sig message</div>
-        <div class="chip-btn" onclick="setOverrideText('Someone messaged about my sales-funnel project, need to prep it deeply')">Sales-funnel message</div>
-        <div class="chip-btn" onclick="setOverrideText('Got a referral opportunity, need to research company and tailor resume')">Referral opportunity</div>
-        <div class="chip-btn" onclick="setOverrideText('Ahead on applications, free up time for project deep-dive')">Ahead on apps</div>
-        <div class="chip-btn" onclick="setOverrideText('Need extra SQL practice today')">Extra SQL focus</div>
+        <div class="chip-btn" onclick="setOvr('Someone messaged about my pokemon-meta-tracker, need to prep it deeply')">Pokemon message</div>
+        <div class="chip-btn" onclick="setOvr('Someone messaged about my collapse-signature project, need to prep it deeply')">Collapse-sig message</div>
+        <div class="chip-btn" onclick="setOvr('Someone messaged about my sales-funnel project, need to prep it deeply')">Sales-funnel message</div>
+        <div class="chip-btn" onclick="setOvr('Got a referral opportunity, need to research company and tailor resume')">Referral opportunity</div>
+        <div class="chip-btn" onclick="setOvr('Ahead on applications, free up time for project deep-dive')">Ahead on apps</div>
+        <div class="chip-btn" onclick="setOvr('Need extra SQL practice today')">Extra SQL</div>
       </div>
       <div class="sit-row">
         <input class="sit-input" id="override-input" type="text" placeholder="Describe what happened...">
@@ -352,27 +345,27 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
       <span class="sit-chev" id="chev-tomorrow">▼</span>
     </div>
     <div class="sit-body" id="body-tomorrow">
-      <div class="sit-hint-text">Tell the app what's happening tomorrow so it prepares the right schedule — don't rely on EOD detection alone for time-sensitive events.</div>
+      <div class="sit-hint-text">Set this now so tomorrow's generation is already prepared — don't rely on EOD detection alone.</div>
       <div class="chips">
         <div class="chip-btn" onclick="document.getElementById('tmr-type').value='Recruiter / HR screen'">Recruiter screen</div>
         <div class="chip-btn" onclick="document.getElementById('tmr-type').value='Technical interview'">Technical interview</div>
         <div class="chip-btn" onclick="document.getElementById('tmr-type').value='Take-home assessment due'">Assessment due</div>
         <div class="chip-btn" onclick="document.getElementById('tmr-type').value='Project-specific call'">Project call</div>
-        <div class="chip-btn" onclick="clearTomorrowAlert()">Clear alert</div>
+        <div class="chip-btn" onclick="clearTmr()">Clear alert</div>
       </div>
       <div class="sit-grid">
         <div>
-          <div class="sit-label">Event Type</div>
-          <input class="sit-input full" id="tmr-type" type="text" placeholder="e.g. Recruiter screen at Spotify">
+          <span class="sit-label">Event Type</span>
+          <input class="sit-input full" id="tmr-type" type="text" placeholder="e.g. Recruiter screen at Flipkart">
         </div>
         <div>
-          <div class="sit-label">Company</div>
-          <input class="sit-input full" id="tmr-company" type="text" placeholder="e.g. Riot Games">
+          <span class="sit-label">Company</span>
+          <input class="sit-input full" id="tmr-company" type="text" placeholder="e.g. Dream11">
         </div>
       </div>
-      <div class="sit-label">Specific Project They Mentioned</div>
+      <span class="sit-label">Project They Mentioned (if any)</span>
       <input class="sit-input full" id="tmr-project" type="text" placeholder="e.g. pokemon-meta-tracker, sales-funnel..." style="margin-bottom:0.65rem;">
-      <button class="s-btn acc" onclick="saveTomorrowAlert()">Set Alert</button>
+      <button class="s-btn acc" onclick="saveTmr()">Set Alert</button>
       <div class="sit-confirm green" id="tmr-confirm">✓ Alert set — tomorrow's generation will reflect this</div>
     </div>
   </div>
@@ -387,52 +380,48 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
       <span class="sit-chev" id="chev-assessment">▼</span>
     </div>
     <div class="sit-body" id="body-assessment">
-      <div class="sit-hint-text">Activate this when a company sends a SQL test, Python task, or case study. Learning blocks clear and you get focused assessment time.</div>
+      <div class="sit-hint-text">Activate when a company sends a SQL test, Python task, or case study. Learning blocks clear and you get focused time.</div>
       <div class="sit-grid">
         <div>
-          <div class="sit-label">Assessment Type</div>
+          <span class="sit-label">Assessment Type</span>
           <input class="sit-input full" id="asmt-type" type="text" placeholder="SQL test / Python / Case study">
         </div>
         <div>
-          <div class="sit-label">Deadline (hours from now)</div>
+          <span class="sit-label">Deadline (hours from now)</span>
           <input class="sit-input full" id="asmt-hours" type="number" placeholder="e.g. 48">
         </div>
       </div>
-      <div class="sit-label">Company</div>
+      <span class="sit-label">Company</span>
       <input class="sit-input full" id="asmt-company" type="text" placeholder="Company name" style="margin-bottom:0.65rem;">
       <div style="display:flex;gap:0.6rem;">
-        <button class="s-btn acc" onclick="activateAssessment()">Activate</button>
-        <button class="s-btn danger" onclick="deactivateAssessment()">Deactivate</button>
+        <button class="s-btn acc" onclick="activateAsmt()">Activate</button>
+        <button class="s-btn danger" onclick="deactivateAsmt()">Deactivate</button>
       </div>
       <div class="sit-confirm amber" id="asmt-confirm">📝 Assessment mode active — learning blocks cleared</div>
     </div>
   </div>
 
   <!-- BANNERS -->
-  <div class="banner red show" id="skip-banner" style="display:none;">
-    <div class="banner-title" style="color:var(--acc3)" id="skip-banner-title">Pattern detected</div>
-    <div class="banner-sub" id="skip-banner-sub"></div>
+  <div class="banner red" id="skip-banner" style="display:none;">
+    <div class="banner-title" style="color:var(--acc3)" id="skip-title">Pattern detected</div>
+    <div class="banner-sub" id="skip-sub"></div>
     <div class="banner-actions">
       <button class="s-btn danger" onclick="removeSkip()">Remove Block</button>
       <button class="s-btn" onclick="dismissSkip()">Keep It</button>
     </div>
   </div>
-
   <div class="banner purple" id="burnout-banner">
     <div class="banner-title" style="color:var(--acc5)">Recovery Mode — easier day ahead</div>
-    <div class="banner-sub">Your EOD mentioned exhaustion. Today is lighter — consolidation only, no new topics, reduced intensity. Keep applications going.</div>
+    <div class="banner-sub">Your EOD mentioned exhaustion. Today is lighter — consolidation only, no new topics. Keep applications going.</div>
   </div>
-
   <div class="banner yellow" id="interview-banner">
-    <div class="banner-title" style="color:var(--acc)" id="interview-banner-title">🎯 Interview Detected — Intense Mode Active</div>
-    <div class="banner-sub" id="interview-banner-sub">You reported an interview in your last EOD or set a tomorrow alert. Prep block is maxed. Everything else scales back.</div>
+    <div class="banner-title" style="color:var(--acc)">🎯 Interview Detected — Intense Mode Active</div>
+    <div class="banner-sub" id="interview-sub">You reported an interview or set a tomorrow alert. Prep block is maxed. Everything else scales back.</div>
   </div>
-
   <div class="banner amber" id="assessment-banner">
-    <div class="banner-title" style="color:var(--acc6)" id="assessment-banner-title">📝 Assessment Mode Active</div>
-    <div class="banner-sub" id="assessment-banner-sub">Take-home assessment in progress. Learning blocks cleared.</div>
+    <div class="banner-title" style="color:var(--acc6)" id="asmt-banner-title">📝 Assessment Mode Active</div>
+    <div class="banner-sub" id="asmt-banner-sub">Take-home assessment in progress. Learning blocks cleared.</div>
   </div>
-
   <div class="banner blue" id="override-banner">
     <div class="banner-title" style="color:var(--acc2)" id="override-banner-text">⚡ Override active</div>
   </div>
@@ -446,10 +435,10 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
     <div class="prog-row"><span>Daily Progress</span><span id="prog-text">0 / 0</span></div>
     <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
     <div class="legend">
-      <div class="leg"><div class="leg-dot" style="background:var(--acc)"></div>US Apps</div>
-      <div class="leg"><div class="leg-dot" style="background:#ff9f1c"></div>India Apps</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--acc)"></div>India Apps</div>
+      <div class="leg"><div class="leg-dot" style="background:#ff9f1c"></div>US Remote</div>
       <div class="leg"><div class="leg-dot" style="background:var(--acc2)"></div>LinkedIn</div>
-      <div class="leg"><div class="leg-dot" style="background:var(--acc4)"></div>India Network</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--acc4)"></div>Network</div>
       <div class="leg"><div class="leg-dot" style="background:var(--acc5)"></div>SQL</div>
       <div class="leg"><div class="leg-dot" style="background:var(--acc3)"></div>Projects</div>
       <div class="leg"><div class="leg-dot" style="background:var(--acc6)"></div>Stats/BI</div>
@@ -461,21 +450,17 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
     <div class="eod-wrap">
       <div class="eod-section-title">End of Day Update</div>
       <div class="eod-nums">
-        <div class="eod-field">
-          <div class="eod-field-label">US Apps Today</div>
-          <input class="eod-num-input" id="eod-us" type="number" min="0" placeholder="0">
-        </div>
-        <div class="eod-field">
-          <div class="eod-field-label">India Apps Today</div>
+        <div>
+          <span class="eod-field-label">India Apps Today</span>
           <input class="eod-num-input" id="eod-india" type="number" min="0" placeholder="0">
         </div>
-        <div class="eod-field">
-          <div class="eod-field-label">LinkedIn Connects</div>
+        <div>
+          <span class="eod-field-label">LinkedIn Connects</span>
           <input class="eod-num-input" id="eod-li" type="number" min="0" placeholder="0">
         </div>
-        <div class="eod-field">
-          <div class="eod-field-label">Blocks Done</div>
-          <input class="eod-num-input" id="eod-blocks" type="number" min="0" placeholder="0">
+        <div>
+          <span class="eod-field-label">US Remote Apps</span>
+          <input class="eod-num-input" id="eod-us" type="number" min="0" placeholder="0">
         </div>
       </div>
       <div class="eod-hint-chips">
@@ -488,7 +473,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
         <div class="eod-hint-btn" onclick="appendEOD('LinkedIn audit done')">Audit done</div>
       </div>
       <textarea class="eod-textarea" id="eod-note" placeholder="What went well? What did you struggle with? Any interviews, messages, referrals, or assessments? Tomorrow adapts to this..."></textarea>
-      <div class="eod-field-label" style="color:rgba(255,92,56,0.7);margin-top:0.75rem;">Interview Feedback Received (if any)</div>
+      <span class="eod-feedback-label">Interview Feedback Received (if any)</span>
       <input class="eod-feedback-input" id="eod-feedback" type="text" placeholder="e.g. They said my SQL was weak / Couldn't explain XGBoost / Moving to next round...">
       <div class="eod-actions">
         <button class="eod-save-btn" id="eod-save-btn">Save EOD Update</button>
@@ -501,488 +486,414 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
 <script>
 // ═══════════════════════════════════════════════════════
-// CURRICULUM DATA
+// CURRICULUM
 // ═══════════════════════════════════════════════════════
 const PYTHON=[
-  {t:"Data types, variables & control flow",d:"Lists, dicts, sets, tuples. Comprehensions. When to use which. Write 5 examples."},
-  {t:"Functions — args, kwargs, defaults, scope",d:"Write 3 functions mirroring real project logic. Understand *args and **kwargs."},
+  {t:"Data types, variables & control flow",d:"Lists, dicts, sets, tuples. Comprehensions. Write 5 examples."},
+  {t:"Functions — args, kwargs, defaults, scope",d:"Write 3 functions mirroring real project logic."},
   {t:"OOP basics — classes, __init__, methods",d:"Understand why sklearn uses class-based structure. Build a simple class."},
   {t:"File I/O and working with CSVs manually",d:"Read/write with open(). Understand what pandas does under the hood."},
   {t:"Error handling — try/except/finally",d:"Wrap API calls and file reads. Connect to your USGS and BLS API usage."},
   {t:"NumPy — arrays, broadcasting, shapes",d:"Array ops, slicing, reshape. Understand why ML uses arrays not lists."},
   {t:"Pandas Part 1 — Series, DataFrame, indexing",d:"Build a mini dataset. Slice it 5 ways. Understand iloc vs loc."},
-  {t:"Pandas Part 2 — groupby, merge, pivot, apply",d:"Replicate a transformation from your retail-segmentation project."},
-  {t:"Pandas Part 3 — cleaning, nulls, dtypes, datetime",d:"Mirror the preprocessing from your hr-attrition pipeline."},
-  {t:"Matplotlib — line, bar, scatter, subplots",d:"Recreate one chart from your projects from scratch without Plotly."},
-  {t:"Seaborn — heatmaps, distributions, pairplots",d:"Understand what Seaborn adds over Matplotlib. Use on any dataset."},
+  {t:"Pandas Part 2 — groupby, merge, pivot, apply",d:"Replicate a transformation from retail-segmentation."},
+  {t:"Pandas Part 3 — cleaning, nulls, dtypes, datetime",d:"Mirror the preprocessing from hr-attrition."},
+  {t:"Matplotlib — line, bar, scatter, subplots",d:"Recreate one chart from your projects without Plotly."},
+  {t:"Seaborn — heatmaps, distributions, pairplots",d:"Understand what Seaborn adds over Matplotlib."},
   {t:"Scikit-learn pipeline — fit/transform/predict",d:"Understand how estimators work. Build a pipeline from scratch."},
-  {t:"Feature engineering — encoding, scaling, binning",d:"Why StandardScaler? Why one-hot vs label encoding? Build examples."},
-  {t:"K-Means — how it works under the hood",d:"Implement manually step-by-step. Link to your retail-segmentation and earthquake projects."},
+  {t:"Feature engineering — encoding, scaling, binning",d:"Why StandardScaler? Why one-hot vs label encoding?"},
+  {t:"K-Means — how it works under the hood",d:"Implement manually. Link to retail-segmentation and earthquake."},
   {t:"Logistic regression — math and implementation",d:"Understand sigmoid, log loss, decision boundary. Link to collapse-signature."},
-  {t:"Decision Trees & Random Forest",d:"Understand splits, Gini impurity, feature importance. Link to hr-attrition."},
+  {t:"Decision Trees & Random Forest",d:"Gini impurity, feature importance. Link to hr-attrition."},
   {t:"XGBoost — gradient boosting intuition",d:"Boosting vs bagging. Why XGBoost wins. Link to pokemon-meta and flight-delay."},
-  {t:"SHAP — how it works and why it matters",d:"Understand Shapley values. Interpret your own SHAP outputs from your projects."},
+  {t:"SHAP — how it works and why it matters",d:"Understand Shapley values. Interpret your own SHAP outputs."},
   {t:"Model evaluation — precision, recall, F1, ROC-AUC",d:"When to use which metric. Why hr-attrition tuned threshold to 0.29."},
-  {t:"Cross-validation and overfitting",d:"LOO-CV, k-fold, train/test split. Link to collapse-signature's LOO-CV choice."},
-  {t:"Isolation Forest — anomaly detection",d:"How it works. Why sampling is used. Link to earthquake and ai-smart-home."},
+  {t:"Cross-validation and overfitting",d:"LOO-CV, k-fold, train/test split. Link to collapse-signature's LOO-CV."},
+  {t:"Isolation Forest — anomaly detection",d:"How it works. Link to earthquake and ai-smart-home."},
   {t:"Time series — trends, seasonality, stationarity",d:"What Prophet does. Why ARIMA exists. Link to ai-smart-home."},
   {t:"API calls — requests, JSON, pagination",d:"Understand your USGS, BLS, Open-Meteo calls line by line."},
   {t:"SciPy stats module",d:"t-tests, z-tests, chi-square. Bridge to your A/B testing project."},
-  {t:"Statistics — distributions deep dive",d:"Normal, binomial, Poisson. When each applies. Link to A/B testing."},
+  {t:"Statistics — distributions deep dive",d:"Normal, binomial, Poisson. When each applies."},
 ];
-
 const SQL=[
   {t:"SELECT, WHERE, ORDER BY, LIMIT",d:"Write 10 queries from scratch on any dataset."},
-  {t:"Aggregations — COUNT, SUM, AVG, GROUP BY, HAVING",d:"Replicate a funnel metric from your sales-funnel project."},
-  {t:"JOINs — INNER, LEFT, RIGHT, FULL OUTER",d:"Understand what each returns. Write examples for each type."},
-  {t:"Subqueries and CTEs",d:"Rewrite a subquery as a CTE. Link to your sales-funnel and A/B testing projects."},
-  {t:"Window functions — ROW_NUMBER, RANK, LAG, LEAD",d:"Write a running total and week-over-week comparison. Link to sales-funnel."},
-  {t:"CASE statements and conditional logic",d:"Build a segmentation query. Link to ab-testing bracket logic."},
-  {t:"Date/time functions — DATE_TRUNC, EXTRACT",d:"Write time-based aggregations. Link to your funnel weekly trend queries."},
-  {t:"String functions and pattern matching",d:"LIKE, ILIKE, SPLIT_PART, CONCAT. Common in data cleaning."},
-  {t:"NULL handling — COALESCE, NULLIF, IS NULL",d:"Understand why your sales-funnel preprocessing handled 50M nulls."},
-  {t:"Indexes and query performance",d:"Understand why adding 6 indexes cut your query from 60min to 5sec."},
+  {t:"Aggregations — COUNT, SUM, AVG, GROUP BY, HAVING",d:"Replicate a funnel metric from sales-funnel."},
+  {t:"JOINs — INNER, LEFT, RIGHT, FULL OUTER",d:"Write examples for each type."},
+  {t:"Subqueries and CTEs",d:"Rewrite a subquery as a CTE. Link to sales-funnel and ab-testing."},
+  {t:"Window functions — ROW_NUMBER, RANK, LAG, LEAD",d:"Running total and week-over-week comparison."},
+  {t:"CASE statements and conditional logic",d:"Build a segmentation query."},
+  {t:"Date/time functions — DATE_TRUNC, EXTRACT",d:"Time-based aggregations. Link to funnel weekly trends."},
+  {t:"String functions and pattern matching",d:"LIKE, ILIKE, SPLIT_PART, CONCAT."},
+  {t:"NULL handling — COALESCE, NULLIF, IS NULL",d:"Understand why sales-funnel handled 50M nulls."},
+  {t:"Indexes and query performance",d:"Why adding 6 indexes cut your query from 60min to 5sec."},
   {t:"Statistical SQL — z-score, stddev, percentiles",d:"Replicate your A/B testing significance tests in SQL."},
   {t:"LeetCode SQL Easy — 10 problems",d:"Problems: 175, 176, 182, 183, 196, 197, 511, 512, 570, 577."},
   {t:"LeetCode SQL Medium — 10 problems",d:"Problems: 178, 180, 184, 185, 262, 550, 570, 574, 580, 584."},
   {t:"HackerRank SQL Certification",d:"Complete Basic cert. Start Intermediate. Speed is what they test."},
 ];
-
 const BI=[
-  {tool:"Tableau",t:"Calculated fields and LOD expressions",d:"Learn FIXED, INCLUDE, EXCLUDE. Replicate a metric from your sales-funnel dashboard."},
-  {tool:"Power BI",t:"Data model, relationships, first visual",d:"Import a CSV. Create a table relationship. Build your first visual. Power BI is in 70% of India DA JDs."},
-  {tool:"Tableau",t:"Dashboard actions and interactive filters",d:"Build an interactive filter. Replicate the interactivity in your flight-delay dashboard."},
-  {tool:"Power BI",t:"DAX basics — CALCULATE, FILTER, SUMX",d:"Write 5 DAX measures. Understand why DAX is different from Excel formulas."},
-  {tool:"Tableau",t:"Table calculations — running total, percent of total",d:"Understand compute across vs down. Apply to A/B testing conversion data."},
+  {tool:"Tableau",t:"Calculated fields and LOD expressions",d:"Learn FIXED, INCLUDE, EXCLUDE. Replicate a metric from sales-funnel."},
+  {tool:"Power BI",t:"Data model, relationships, first visual",d:"Import a CSV. Create a table relationship. Build your first visual."},
+  {tool:"Tableau",t:"Dashboard actions and interactive filters",d:"Build an interactive filter. Replicate interactivity from flight-delay."},
+  {tool:"Power BI",t:"DAX basics — CALCULATE, FILTER, SUMX",d:"Write 5 DAX measures. Understand why DAX differs from Excel formulas."},
+  {tool:"Tableau",t:"Table calculations — running total, percent of total",d:"Compute across vs down. Apply to A/B testing conversion data."},
   {tool:"Power BI",t:"Power Query — transforming data before load",d:"Clean a messy CSV in Power Query. Understand M language basics."},
-  {tool:"Tableau",t:"Advanced charts — bullet, waterfall, Gantt",d:"Build one non-standard chart type that would stand out in a DA portfolio."},
+  {tool:"Tableau",t:"Advanced charts — bullet, waterfall, Gantt",d:"Build one non-standard chart type for your portfolio."},
   {tool:"Power BI",t:"Build a report end-to-end from scratch",d:"Take one of your project CSV exports and build a complete Power BI report."},
 ];
-
 const STATS=[
-  {t:"Hypothesis testing fundamentals",d:"Null vs alternative hypothesis, Type I & II errors, statistical power. Link to A/B testing."},
-  {t:"p-values and significance",d:"What p=0.05 actually means. What it doesn't mean. Common misconceptions."},
-  {t:"Confidence intervals",d:"How they're constructed. What 95% CI means. Link to your SQL-based CI calculations."},
-  {t:"Normal distribution deep dive",d:"Z-scores, standard normal, 68-95-99.7 rule. When to assume normality."},
+  {t:"Hypothesis testing fundamentals",d:"Null vs alternative hypothesis, Type I & II errors. Link to ab-testing."},
+  {t:"p-values and significance",d:"What p=0.05 actually means. Common misconceptions interviewers test."},
+  {t:"Confidence intervals",d:"How they're constructed. Link to your SQL-based CI calculations."},
+  {t:"Normal distribution deep dive",d:"Z-scores, standard normal, 68-95-99.7 rule."},
   {t:"Correlation vs causation",d:"Pearson r, Spearman r, Simpson's paradox. Why SHAP beats correlation."},
   {t:"Regression intuition",d:"OLS, R², residuals, multicollinearity. Why logistic regression uses log-odds."},
-  {t:"Bayesian thinking basics",d:"Prior, likelihood, posterior. Bayes' theorem. Why it matters for data analysts."},
-  {t:"Sampling and bias",d:"Random, stratified, cluster sampling. Selection bias. Link to SMOTE in hr-attrition."},
+  {t:"Bayesian thinking basics",d:"Prior, likelihood, posterior. Why it matters for data analysts."},
+  {t:"Sampling and bias",d:"Random, stratified, cluster sampling. Link to SMOTE in hr-attrition."},
 ];
-
 const PROJECTS=[
-  {n:"collapse-signature",w:3,tags:["SHAP","logistic regression","permutation testing","Moran's I spatial autocorrelation","NetworkX PageRank","LOO-CV (92% accuracy)"]},
-  {n:"pokemon-meta-tracker",w:3,tags:["XGBoost (ROC-AUC 0.9452)","SHAP waterfall","feature engineering","multi-class classification","ability scoring system"]},
-  {n:"flight-delay-prediction",w:3,tags:["XGBoost on 1.86M flights","SHAP","PostgreSQL feature engineering","Open-Meteo API","Tableau Public"]},
-  {n:"sales-funnel-analysis",w:3,tags:["PostgreSQL 18.3","109M rows","CTEs","window functions","LAG/LEAD","IQR outlier detection","Tableau"]},
-  {n:"hr-attrition-analysis",w:2,tags:["XGBoost + SMOTE","threshold tuning 0.50→0.29","SHAP TreeExplainer","BLS API","multi-source data merge"]},
-  {n:"retail-customer-segmentation",w:2,tags:["K-Means clustering","RFM analysis","PCA","elbow curve","62M transactions","Streamlit"]},
-  {n:"earthquake-risk-dashboard",w:2,tags:["USGS live API","K-Means hotzones","Folium + tectonic plates","baseline anomaly detection","Gutenberg-Richter"]},
-  {n:"ab-testing",w:2,tags:["PostgreSQL","z-score & p-value in SQL","confidence intervals","882K rows","Tableau Public"]},
-  {n:"ai-smart-home",w:1,tags:["Random Forest (88%)","Isolation Forest","Prophet forecasting","MQTT","IoT pipeline"]},
-  {n:"ai-stem-separator",w:1,tags:["Meta Demucs","librosa MFCC","XGBoost genre classifier","GTZAN dataset","Streamlit"]},
+  {n:"collapse-signature",w:3,tags:["SHAP","logistic regression","permutation testing","Moran's I","NetworkX PageRank","LOO-CV 92%"]},
+  {n:"pokemon-meta-tracker",w:3,tags:["XGBoost ROC-AUC 0.9452","SHAP waterfall","feature engineering","multi-class classification"]},
+  {n:"flight-delay-prediction",w:3,tags:["XGBoost 1.86M flights","SHAP","PostgreSQL feature engineering","Open-Meteo API","Tableau"]},
+  {n:"sales-funnel-analysis",w:3,tags:["PostgreSQL","109M rows","CTEs","window functions","LAG/LEAD","Tableau"]},
+  {n:"hr-attrition-analysis",w:2,tags:["XGBoost + SMOTE","threshold tuning 0.50→0.29","SHAP TreeExplainer","BLS API"]},
+  {n:"retail-customer-segmentation",w:2,tags:["K-Means","RFM analysis","PCA","elbow curve","62M transactions"]},
+  {n:"earthquake-risk-dashboard",w:2,tags:["USGS live API","K-Means hotzones","Folium","anomaly detection"]},
+  {n:"ab-testing",w:2,tags:["PostgreSQL","z-score & p-value in SQL","confidence intervals","882K rows"]},
+  {n:"ai-smart-home",w:1,tags:["Random Forest 88%","Isolation Forest","Prophet forecasting","IoT pipeline"]},
+  {n:"ai-stem-separator",w:1,tags:["Meta Demucs","librosa MFCC","XGBoost genre classifier","GTZAN dataset"]},
 ];
-
 const INTERVIEW_PREP=[
   {t:"Behavioural questions — STAR method",d:"Practice: 'Tell me about yourself', 'Why data analytics?', 'Biggest challenge'. Record yourself."},
-  {t:"Project walkthrough — collapse-signature",d:"Full narrative: problem → approach → findings → impact. Time yourself to 3 minutes."},
-  {t:"Project walkthrough — pokemon-meta-tracker",d:"Explain XGBoost choice, SHAP outputs, what you'd do differently. Anticipate: 'Why not Random Forest?'"},
-  {t:"Project walkthrough — sales-funnel-analysis",d:"Explain the 109M row pipeline, cart abandonment finding, and 5 business recommendations."},
-  {t:"Project walkthrough — flight-delay-prediction",d:"Explain feature engineering, why pandemic years excluded, how SHAP identified departure hour as #1."},
-  {t:"Technical SQL round practice",d:"Solve 5 LeetCode medium SQL problems under time pressure. Simulate interview conditions."},
-  {t:"Statistics interview questions",d:"Practice: explain p-value to a non-technical manager, what's overfitting, precision vs recall."},
-  {t:"Case study practice",d:"Pick a business problem (e.g. reduce churn). Walk through how you'd approach it end-to-end."},
-  {t:"Project walkthrough — hr-attrition",d:"Explain threshold tuning from 0.50 to 0.29, why recall matters more than precision in HR context."},
-  {t:"Project walkthrough — retail-segmentation",d:"Explain RFM, why k=4 over k=2, and how each segment maps to a marketing action."},
+  {t:"Project walkthrough — collapse-signature",d:"Full narrative: problem → approach → findings → impact. Time to 3 minutes."},
+  {t:"Project walkthrough — pokemon-meta-tracker",d:"Explain XGBoost choice, SHAP outputs, what you'd do differently."},
+  {t:"Project walkthrough — sales-funnel-analysis",d:"Explain the 109M row pipeline, cart abandonment finding, 5 business recommendations."},
+  {t:"Project walkthrough — flight-delay-prediction",d:"Feature engineering, why pandemic years excluded, SHAP identified departure hour as #1."},
+  {t:"Technical SQL round practice",d:"5 LeetCode medium SQL problems under time pressure. Simulate interview."},
+  {t:"Statistics interview questions",d:"p-value to a non-technical manager, overfitting, precision vs recall."},
+  {t:"Case study practice",d:"Pick a business problem (e.g. reduce churn). Walk through end-to-end."},
+  {t:"Project walkthrough — hr-attrition",d:"Threshold tuning 0.50→0.29, why recall matters more than precision in HR."},
+  {t:"Project walkthrough — retail-segmentation",d:"RFM, why k=4 over k=2, how each segment maps to a marketing action."},
 ];
 
 // ═══════════════════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════════════════
-function makeStartDate() {
-  const d = new Date();
-  d.setDate(d.getDate() + 1);
-  return d.toISOString().split('T')[0];
-}
-
-const DEFAULT = {
-  startDate: makeStartDate(),
-  currentWeek: 1,
-  pythonIdx: 0,
-  sqlIdx: 0,
-  biIdx: 0,
-  statsIdx: 0,
-  projectRotation: [],
-  eodHistory: [],
-  weeklyStats: { usApps:0, indiaApps:0, liConnects:0, weekStart: makeStartDate() },
-  linkedInAuditDone: false,
-  tomorrowAlert: null,
-  assessmentMode: null,
-  skipCounts: {},
-  lastFeedback: '',
-  burnoutMode: false,
-  overrideText: '',
+const DEFAULT={
+  currentWeek:1,
+  pythonIdx:0, sqlIdx:0, biIdx:0, statsIdx:0,
+  projectRotation:[],
+  eodHistory:[],
+  weeklyStats:{indiaApps:0, usApps:0, liConnects:0, weekStart: new Date().toISOString().split('T')[0]},
+  linkedInAuditDone:false,
+  tomorrowAlert:null,
+  assessmentMode:null,
+  skipCounts:{},
+  lastFeedback:'',
+  burnoutMode:false,
+  overrideText:'',
 };
 
-let S = loadState();
-let currentDay = 'weekday';
-let schedule = [];
-let skippedCat = '';
+let S=loadState();
+let currentDay='weekday';
+let schedule=[];
+let skippedCat='';
 
-function loadState() {
-  try {
-    const raw = localStorage.getItem('mc_v4');
-    if (raw) return Object.assign({}, DEFAULT, JSON.parse(raw));
-  } catch(e) {}
-  return Object.assign({}, DEFAULT);
+function loadState(){
+  try{ const r=localStorage.getItem('mc_v5'); if(r) return Object.assign({},DEFAULT,JSON.parse(r)); }catch(e){}
+  return Object.assign({},DEFAULT);
 }
-
-function save() {
-  try { localStorage.setItem('mc_v4', JSON.stringify(S)); } catch(e) {}
-  try { window.storage.set('mc_v4', JSON.stringify(S)); } catch(e) {}
+function save(){
+  try{ localStorage.setItem('mc_v5',JSON.stringify(S)); }catch(e){}
+  try{ window.storage.set('mc_v5',JSON.stringify(S)); }catch(e){}
 }
-
-async function loadPersistent() {
-  try {
-    const r = await window.storage.get('mc_v4');
-    if (r && r.value) {
-      S = Object.assign({}, DEFAULT, JSON.parse(r.value));
-      localStorage.setItem('mc_v4', JSON.stringify(S));
-      refreshUI();
-    }
-  } catch(e) {}
+async function loadPersistent(){
+  try{
+    const r=await window.storage.get('mc_v5');
+    if(r&&r.value){ S=Object.assign({},DEFAULT,JSON.parse(r.value)); localStorage.setItem('mc_v5',JSON.stringify(S)); refreshUI(); }
+  }catch(e){}
 }
 
 // ═══════════════════════════════════════════════════════
 // PANELS
 // ═══════════════════════════════════════════════════════
-function togglePanel(id) {
-  const body = document.getElementById('body-' + id);
-  const chev = document.getElementById('chev-' + id);
-  const open = body.classList.toggle('open');
-  chev.classList.toggle('open', open);
+function togglePanel(id){
+  const b=document.getElementById('body-'+id);
+  const c=document.getElementById('chev-'+id);
+  const open=b.classList.toggle('open');
+  c.classList.toggle('open',open);
 }
 
 // ═══════════════════════════════════════════════════════
 // OVERRIDE
 // ═══════════════════════════════════════════════════════
-function setOverrideText(t) {
-  document.getElementById('override-input').value = t;
-}
-
-function applyOverride() {
-  const text = document.getElementById('override-input').value.trim();
-  if (!text) return;
-  S.overrideText = text;
-  save();
-  showEl('override-confirm', 'blue');
-  document.getElementById('override-banner-text').textContent = '⚡ Override active: ' + text;
+function setOvr(t){ document.getElementById('override-input').value=t; }
+function applyOverride(){
+  const text=document.getElementById('override-input').value.trim();
+  if(!text) return;
+  S.overrideText=text; save();
+  showConfirm('override-confirm','blue');
+  document.getElementById('override-banner-text').textContent='⚡ Override: '+text;
   showBanner('override-banner');
-  // inject override block if schedule is visible
   injectOverride(text);
-  setTimeout(() => hideEl('override-confirm'), 3000);
 }
-
-function injectOverride(text) {
-  const lc = text.toLowerCase();
-  let proj = null;
-  PROJECTS.forEach(p => {
-    if (lc.includes(p.n) || lc.includes(p.n.replace(/-/g,' '))) proj = p;
-  });
-  if (!proj) return;
-  const idx = schedule.findIndex(b => !b.done && b.cat === 'projects');
-  if (idx < 0) return;
-  schedule[idx].title = 'OVERRIDE: ' + proj.n + ' deep-dive';
-  schedule[idx].tasks = [
+function injectOverride(text){
+  const lc=text.toLowerCase();
+  let proj=null;
+  PROJECTS.forEach(p=>{ if(lc.includes(p.n)||lc.includes(p.n.replace(/-/g,' '))) proj=p; });
+  if(!proj) return;
+  const idx=schedule.findIndex(b=>!b.done&&b.cat==='projects');
+  if(idx<0) return;
+  schedule[idx].title='OVERRIDE: '+proj.n+' deep-dive';
+  schedule[idx].tasks=[
     'Someone reached out about this project — prep it cold.',
-    'Key concepts: ' + proj.tags.join(', '),
-    '"Walk me through ' + proj.n + '" — write 5 sentences. Say it out loud.',
-    '"Why did you choose X?" — prep every major technical decision.',
+    'Key concepts: '+proj.tags.join(', '),
+    '"Walk me through '+proj.n+'" — write 5 sentences. Say it out loud.',
+    '"Why did you choose X?" — every major technical decision.',
     '"What would you do differently?" — honest thoughtful answer.',
   ];
-  schedule[idx].isOverride = true;
+  schedule[idx].isOverride=true;
   rerenderBlock(idx);
 }
-
-function rerenderBlock(i) {
-  const el = document.getElementById('block-' + i);
-  if (!el) return;
-  const b = schedule[i];
-  el.querySelector('.block-title').innerHTML = b.title + (b.isOverride ? '<span class="badge badge-override">OVERRIDE</span>' : '');
-  el.querySelector('.block-tasks').innerHTML = (b.tasks||[]).map(t => `<li>${t}</li>`).join('');
+function rerenderBlock(i){
+  const el=document.getElementById('block-'+i);
+  if(!el) return;
+  const b=schedule[i];
+  el.querySelector('.block-title').innerHTML=b.title+(b.isOverride?'<span class="badge badge-override">OVERRIDE</span>':'');
+  el.querySelector('.block-tasks').innerHTML=(b.tasks||[]).map(t=>`<li>${t}</li>`).join('');
 }
 
 // ═══════════════════════════════════════════════════════
 // TOMORROW ALERT
 // ═══════════════════════════════════════════════════════
-function saveTomorrowAlert() {
-  const type = document.getElementById('tmr-type').value.trim();
-  const company = document.getElementById('tmr-company').value.trim();
-  const project = document.getElementById('tmr-project').value.trim();
-  if (!type) return;
-  S.tomorrowAlert = { type, company, project, set: new Date().toISOString() };
-  save();
-  showEl('tmr-confirm', 'green');
-  setTimeout(() => hideEl('tmr-confirm'), 3000);
+function saveTmr(){
+  const type=document.getElementById('tmr-type').value.trim();
+  const company=document.getElementById('tmr-company').value.trim();
+  const project=document.getElementById('tmr-project').value.trim();
+  if(!type) return;
+  S.tomorrowAlert={type,company,project};
+  save(); showConfirm('tmr-confirm','green');
 }
-
-function clearTomorrowAlert() {
-  S.tomorrowAlert = null;
-  save();
-  document.getElementById('tmr-type').value = '';
-  document.getElementById('tmr-company').value = '';
-  document.getElementById('tmr-project').value = '';
+function clearTmr(){
+  S.tomorrowAlert=null; save();
+  ['tmr-type','tmr-company','tmr-project'].forEach(id=>document.getElementById(id).value='');
 }
 
 // ═══════════════════════════════════════════════════════
 // ASSESSMENT
 // ═══════════════════════════════════════════════════════
-function activateAssessment() {
-  const type = document.getElementById('asmt-type').value.trim() || 'Take-home assessment';
-  const hours = parseInt(document.getElementById('asmt-hours').value) || 48;
-  const company = document.getElementById('asmt-company').value.trim() || 'Company';
-  S.assessmentMode = { type, hours, company };
-  save();
-  showEl('asmt-confirm', 'amber');
-  updateAssessmentBanner();
-  setTimeout(() => hideEl('asmt-confirm'), 3000);
+function activateAsmt(){
+  const type=document.getElementById('asmt-type').value.trim()||'Take-home assessment';
+  const hours=parseInt(document.getElementById('asmt-hours').value)||48;
+  const company=document.getElementById('asmt-company').value.trim()||'Company';
+  S.assessmentMode={type,hours,company}; save();
+  showConfirm('asmt-confirm','amber');
+  updateAsmtBanner();
 }
-
-function deactivateAssessment() {
-  S.assessmentMode = null;
-  save();
-  hideBanner('assessment-banner');
-}
-
-function updateAssessmentBanner() {
-  if (!S.assessmentMode) return;
-  document.getElementById('assessment-banner-title').textContent = '📝 Assessment Mode — ' + S.assessmentMode.type + ' for ' + S.assessmentMode.company;
-  document.getElementById('assessment-banner-sub').textContent = S.assessmentMode.hours + 'hr deadline. Learning blocks cleared.';
+function deactivateAsmt(){ S.assessmentMode=null; save(); hideBanner('assessment-banner'); }
+function updateAsmtBanner(){
+  if(!S.assessmentMode) return;
+  document.getElementById('asmt-banner-title').textContent='📝 Assessment — '+S.assessmentMode.type+' for '+S.assessmentMode.company;
+  document.getElementById('asmt-banner-sub').textContent=S.assessmentMode.hours+'hr deadline. Learning blocks cleared.';
   showBanner('assessment-banner');
 }
 
 // ═══════════════════════════════════════════════════════
-// SKIP DETECTION
+// SKIP
 // ═══════════════════════════════════════════════════════
-function recordSkip(cat) {
-  if (!cat) return;
-  S.skipCounts[cat] = (S.skipCounts[cat] || 0) + 1;
-  save();
-  if (S.skipCounts[cat] >= 3) {
-    skippedCat = cat;
-    const labels = {'india-network':'India Networking','stats':'Stats/Theory','bi':'BI Tools','sql':'SQL','python':'Python'};
-    document.getElementById('skip-banner-title').textContent = 'Pattern: "' + (labels[cat]||cat) + '" skipped ' + S.skipCounts[cat] + ' days in a row';
-    document.getElementById('skip-banner-sub').textContent = 'Remove it, or keep it. Up to you.';
-    document.getElementById('skip-banner').style.display = 'block';
-    document.getElementById('skip-banner').classList.add('show');
+function recordSkip(cat){
+  if(!cat) return;
+  S.skipCounts[cat]=(S.skipCounts[cat]||0)+1; save();
+  if(S.skipCounts[cat]>=3){
+    skippedCat=cat;
+    const labels={'india-network':'India Networking','stats':'Stats/Theory','bi':'BI Tools','sql':'SQL','python':'Python'};
+    document.getElementById('skip-title').textContent='Pattern: "'+(labels[cat]||cat)+'" skipped '+S.skipCounts[cat]+' days in a row';
+    document.getElementById('skip-sub').textContent='Remove it or keep it — your call.';
+    const b=document.getElementById('skip-banner');
+    b.style.display='block'; b.classList.add('show');
   }
 }
-
-function removeSkip() {
-  S.skipCounts[skippedCat] = -99;
-  save();
-  document.getElementById('skip-banner').style.display = 'none';
-}
-
-function dismissSkip() {
-  S.skipCounts[skippedCat] = 0;
-  save();
-  document.getElementById('skip-banner').style.display = 'none';
-}
+function removeSkip(){ S.skipCounts[skippedCat]=-99; save(); document.getElementById('skip-banner').style.display='none'; }
+function dismissSkip(){ S.skipCounts[skippedCat]=0; save(); document.getElementById('skip-banner').style.display='none'; }
 
 // ═══════════════════════════════════════════════════════
-// DETECTION HELPERS
+// DETECTION
 // ═══════════════════════════════════════════════════════
-function detectInterview() {
-  if (S.tomorrowAlert) {
-    const t = S.tomorrowAlert.type.toLowerCase();
-    if (t.includes('interview')||t.includes('screen')||t.includes('technical')||t.includes('call')) return true;
+function detectInterview(){
+  if(S.tomorrowAlert){
+    const t=S.tomorrowAlert.type.toLowerCase();
+    if(t.includes('interview')||t.includes('screen')||t.includes('technical')||t.includes('call')) return true;
   }
-  if (!S.eodHistory.length) return false;
-  const last = S.eodHistory[S.eodHistory.length-1].note.toLowerCase();
-  return last.includes('interview') || last.includes('screening') || last.includes('hr round') || last.includes('recruiter call');
+  if(!S.eodHistory.length) return false;
+  const last=S.eodHistory[S.eodHistory.length-1].note.toLowerCase();
+  return last.includes('interview')||last.includes('screening')||last.includes('hr round')||last.includes('recruiter call');
 }
-
-function detectBurnout(text) {
-  const lc = text.toLowerCase();
-  return lc.includes('exhaust') || lc.includes('burnt') || lc.includes('burnout') || lc.includes('overwhelm') || lc.includes('drained') || lc.includes('tired');
+function detectBurnout(text){
+  const lc=text.toLowerCase();
+  return lc.includes('exhaust')||lc.includes('burnt')||lc.includes('burnout')||lc.includes('overwhelm')||lc.includes('drained')||lc.includes('tired');
 }
-
-function feedbackGap() {
-  if (!S.lastFeedback) return null;
-  const lc = S.lastFeedback.toLowerCase();
-  if (lc.includes('sql')) return 'sql';
-  if (lc.includes('xgboost')||lc.includes('model')||lc.includes('ml')) return 'projects';
-  if (lc.includes('stat')||lc.includes('p-value')) return 'stats';
-  if (lc.includes('python')) return 'python';
-  if (lc.includes('explain')||lc.includes('project')) return 'projects';
+function getFeedbackGap(){
+  if(!S.lastFeedback) return null;
+  const lc=S.lastFeedback.toLowerCase();
+  if(lc.includes('sql')) return 'sql';
+  if(lc.includes('xgboost')||lc.includes('model')||lc.includes('ml')) return 'projects';
+  if(lc.includes('stat')||lc.includes('p-value')) return 'stats';
+  if(lc.includes('python')) return 'python';
+  if(lc.includes('explain')||lc.includes('project')) return 'projects';
   return null;
 }
-
-function nextProjects() {
-  const heavy = PROJECTS.filter(p => p.w === 3);
-  const light = PROJECTS.filter(p => p.w <= 2);
-  const used = S.projectRotation.slice(-6);
-  const h = heavy.filter(p => !used.includes(p.n))[0] || heavy[S.projectRotation.length % heavy.length];
-  const l = light.filter(p => !used.includes(p.n))[0] || light[S.projectRotation.length % light.length];
-  S.projectRotation = [...S.projectRotation.slice(-10), h.n, l.n];
-  return { h, l };
+function getNextProjects(){
+  const heavy=PROJECTS.filter(p=>p.w===3);
+  const light=PROJECTS.filter(p=>p.w<=2);
+  const used=S.projectRotation.slice(-6);
+  const h=heavy.filter(p=>!used.includes(p.n))[0]||heavy[S.projectRotation.length%heavy.length];
+  const l=light.filter(p=>!used.includes(p.n))[0]||light[S.projectRotation.length%light.length];
+  S.projectRotation=[...S.projectRotation.slice(-10),h.n,l.n];
+  return{h,l};
 }
-
-function prepDur(week, intense) {
-  if (intense) return '2.5 hrs';
-  return ({1:'30 min',2:'30 min',3:'1 hr',4:'1 hr',5:'1.5 hrs',6:'1.5 hrs',7:'2 hrs',8:'2 hrs'})[week] || '1 hr';
+function prepDur(week,intense){
+  if(intense) return '2.5 hrs';
+  return({1:'30 min',2:'30 min',3:'1 hr',4:'1 hr',5:'1.5 hrs',6:'1.5 hrs',7:'2 hrs',8:'2 hrs'})[week]||'1 hr';
 }
 
 // ═══════════════════════════════════════════════════════
 // BUILD SCHEDULE
 // ═══════════════════════════════════════════════════════
-function buildSchedule(dayType) {
-  const { h: projH, l: projL } = nextProjects();
-  const py = PYTHON[S.pythonIdx % PYTHON.length];
-  const sq = SQL[S.sqlIdx % SQL.length];
-  const bi = BI[S.biIdx % BI.length];
-  const st = STATS[S.statsIdx % STATS.length];
-  const week = parseInt(document.getElementById('week-sel').value) || S.currentWeek;
-  const intense = detectInterview();
-  const burnout = S.burnoutMode;
-  const assessment = S.assessmentMode;
-  const gap = feedbackGap();
-  const showAudit = !S.linkedInAuditDone && week === 1;
-  const prep = INTERVIEW_PREP[S.pythonIdx % INTERVIEW_PREP.length];
-
-  // specific project from tomorrow alert
-  let alertProj = null;
-  if (S.tomorrowAlert && S.tomorrowAlert.project) {
-    alertProj = PROJECTS.find(p => S.tomorrowAlert.project.toLowerCase().includes(p.n));
+function buildSchedule(dayType){
+  const{h:projH,l:projL}=getNextProjects();
+  const py=PYTHON[S.pythonIdx%PYTHON.length];
+  const sq=SQL[S.sqlIdx%SQL.length];
+  const bi=BI[S.biIdx%BI.length];
+  const st=STATS[S.statsIdx%STATS.length];
+  const week=parseInt(document.getElementById('week-sel').value)||S.currentWeek;
+  const intense=detectInterview();
+  const burnout=S.burnoutMode;
+  const asmt=S.assessmentMode;
+  const gap=getFeedbackGap();
+  const showAudit=!S.linkedInAuditDone&&week===1;
+  const prep=INTERVIEW_PREP[S.pythonIdx%INTERVIEW_PREP.length];
+  let alertProj=null;
+  if(S.tomorrowAlert&&S.tomorrowAlert.project){
+    alertProj=PROJECTS.find(p=>S.tomorrowAlert.project.toLowerCase().includes(p.n));
   }
 
-  let blocks = [];
+  let blocks=[];
 
-  // ── BURNOUT ──────────────────────────────────────────
-  if (burnout) {
-    blocks = [
-      {cat:'us-apps',title:'US Applications — lighter pace',dur:'1 hr',tasks:['Target: 5–6 applications. Quality over quantity today.','Your top target companies only.'],note:'Burnout day. Applications stay — everything else is lighter.'},
-      {cat:'india-apps',title:'India Applications — minimum viable',dur:'30 min',tasks:['Target: 8–10 quick-apply roles.'],note:''},
-      {cat:'projects',title:'Light project review: ' + projL.n,dur:'45 min',tasks:['github.com/anirudh-rs/' + projL.n,'Read casually. No pressure to memorise.','3-sentence explanation — can you do it?'],note:'Consolidation only. No new content today.'},
-      {cat:'interview',title:'Interview Prep — light: ' + prep.t,dur:'30 min',tasks:['Keep it light — watch a video rather than drilling hard.','Just stay warm.'],note:'Rest is productive.'},
+  // BURNOUT
+  if(burnout){
+    blocks=[
+      {cat:'india-apps',title:'India Applications — lighter pace',dur:'1 hr',tasks:['Target: 8–10. Quality over quantity today.','Your top target companies only.'],note:'Recovery day. Applications stay — everything else is lighter.'},
+      {cat:'projects',title:'Light review: '+projL.n,dur:'45 min',tasks:['github.com/anirudh-rs/'+projL.n,'Read casually. No pressure.','3-sentence explanation — can you do it?'],note:'Consolidation only. No new content today.'},
+      {cat:'interview',title:'Interview Prep — light: '+prep.t,dur:'30 min',tasks:['Light touch today — watch a video rather than drilling.','Just stay warm.'],note:'Rest is productive.'},
     ];
-    S.burnoutMode = false;
-    save();
+    S.burnoutMode=false; save();
   }
 
-  // ── ASSESSMENT ───────────────────────────────────────
-  else if (assessment) {
-    blocks = [
-      {cat:'us-apps',title:'US Applications — keep pipeline alive',dur:'45 min',tasks:['Target: 5 applications. Do not let the pipeline die.'],note:''},
-      {cat:'assessment',title:'Assessment Focus: ' + assessment.type + ' — ' + assessment.company,dur:'4 hrs',tasks:[
-        'Deadline: ' + assessment.hours + 'hr from activation.',
-        assessment.type.toLowerCase().includes('sql') ? 'Write clean commented SQL. Explain your reasoning.' : 'Write clean modular Python. Add docstrings.',
-        'Apply what you know from your projects.',
-        'Review once then submit — do not over-polish.',
+  // ASSESSMENT
+  else if(asmt){
+    blocks=[
+      {cat:'india-apps',title:'India Applications — keep pipeline alive',dur:'45 min',tasks:['Target: 8–10. Do not let the pipeline die.'],note:''},
+      {cat:'assessment',title:'Assessment Focus: '+asmt.type+' — '+asmt.company,dur:'4 hrs',tasks:[
+        'Deadline: '+asmt.hours+'hr from activation.',
+        asmt.type.toLowerCase().includes('sql')?'Write clean commented SQL. Explain your reasoning in comments.':'Write clean modular Python. Add docstrings.',
+        'Apply what you know from your projects — they are your best reference.',
+        'Review once then submit. Do not over-polish.',
       ],note:'This is your priority today.',intense:true},
-      {cat:'india-apps',title:'India Applications',dur:'30 min',tasks:['Target: 8–10 quick-apply. Keep India pipeline warm.'],note:''},
+      {cat:'linkedin',title:'LinkedIn — 10 connections while taking breaks',dur:'20 min',tasks:['Connect with 10 DA/DS recruiters or hiring managers at target companies.'],note:''},
     ];
   }
 
-  // ── INTENSE (interview tomorrow) ─────────────────────
-  else if (intense) {
-    const tp = alertProj || projH;
-    blocks = [
-      {cat:'us-apps',title:'US Applications — keep pipeline warm',dur:'1 hr',tasks:['Target: 5–8. Do not stop the pipeline.','Research the interviewing company now if not done.'],note:''},
-      {cat:'interview',title:'INTENSE Prep: ' + (S.tomorrowAlert ? S.tomorrowAlert.type + (S.tomorrowAlert.company ? ' — ' + S.tomorrowAlert.company : '') : 'Interview Prep'),dur:'2.5 hrs',tasks:[
-        S.tomorrowAlert && S.tomorrowAlert.company ? 'Research ' + S.tomorrowAlert.company + ' deeply — product, data stack, recent news, LinkedIn team.' : 'Research the company thoroughly.',
-        '"Tell me about yourself" — tailored to this company.',
-        alertProj ? 'They mentioned ' + alertProj.n + ' — walk through it until completely natural.' : 'Walk through collapse-signature or pokemon-meta-tracker.',
-        'Write every question you cannot answer. Address each one.',
+  // INTENSE
+  else if(intense){
+    const tp=alertProj||projH;
+    blocks=[
+      {cat:'india-apps',title:'India Applications — keep pipeline warm',dur:'45 min',tasks:['Target: 8–10. Do not stop the pipeline even on interview days.'],note:''},
+      {cat:'interview',title:'INTENSE Prep: '+(S.tomorrowAlert?S.tomorrowAlert.type+(S.tomorrowAlert.company?' — '+S.tomorrowAlert.company:''):'Interview Prep'),dur:'2.5 hrs',tasks:[
+        S.tomorrowAlert&&S.tomorrowAlert.company?'Research '+S.tomorrowAlert.company+' deeply — product, data stack, team, recent news.':'Research the company thoroughly before anything else.',
+        '"Tell me about yourself" — tailored to this company specifically.',
+        alertProj?'They mentioned '+alertProj.n+' — walk through it until completely natural.':'"Walk me through your strongest project" — collapse-signature or pokemon-meta.',
+        'Write every question you cannot answer confidently. Address each one.',
         'Record yourself for 10 minutes. Watch it back. Fix what sounds weak.',
-      ],note:'This is the whole day\'s priority.',intense:true},
-      {cat:'projects',title:'Deep-dive: ' + tp.n,dur:'1.5 hrs',tasks:['github.com/anirudh-rs/' + tp.n,'Know cold: ' + tp.tags.join(', '),'"Walk me through this project" — time yourself to 3 minutes.','"Why did you choose X?" — every major decision.','"What would you do differently?"'],note:''},
+      ],note:'This is the whole day. Go get it.',intense:true},
+      {cat:'projects',title:'Deep-dive: '+tp.n,dur:'1.5 hrs',tasks:['github.com/anirudh-rs/'+tp.n,'Know cold: '+tp.tags.join(', '),'"Walk me through this project" — time to exactly 3 minutes.','"Why did you choose X?" — every major decision.','"What would you do differently?"'],note:''},
       {cat:'sql',title:'SQL interview drill',dur:'45 min',tasks:['3 LeetCode medium SQL problems under time pressure.','Write clean SQL with comments — as if they can see your screen.'],note:''},
-      {cat:'india-apps',title:'India Applications',dur:'30 min',tasks:['Target: 8–10 quick-apply.'],note:''},
-      {cat:'linkedin',title:'LinkedIn warm-up',dur:'20 min',tasks:['Message 3–5 people at the company before the call.',S.tomorrowAlert && S.tomorrowAlert.company ? 'Connect with people at ' + S.tomorrowAlert.company + ' before the interview.' : 'Connect with relevant people at the company.'],note:''},
+      {cat:'linkedin',title:'LinkedIn warm-up before call',dur:'20 min',tasks:[S.tomorrowAlert&&S.tomorrowAlert.company?'Connect with 3–5 people at '+S.tomorrowAlert.company+' before the interview.':'Connect with 3–5 people at the company before the call.'],note:''},
     ];
   }
 
-  // ── NORMAL WEEKDAY ───────────────────────────────────
-  else if (dayType === 'weekday') {
-    const sqlBlock = {cat:'sql',title:'SQL: ' + sq.t,dur:'45 min',tasks:['Topic ' + (S.sqlIdx+1) + '/' + SQL.length + ': ' + sq.t, sq.d,'Write every query yourself. Aim under 10 min per problem.'],note:'SQL is tested hard in Indian DA interviews.'};
-    const pyBlock = {cat:'python',title:'Python: ' + py.t,dur:'1 hr',tasks:['Topic ' + (S.pythonIdx+1) + '/' + PYTHON.length + ': ' + py.t, py.d,'Write code. 3 examples of your own.'],note:'Foundation. Every project you built runs on this.'};
-    const gapBlock = gap === 'sql'
-      ? Object.assign({}, sqlBlock, {title:'SQL PRIORITY (feedback gap): ' + sq.t, dur:'1.5 hrs', note:'Feedback flagged this. Extra time allocated.', isFeedback:true})
-      : gap === 'projects'
-      ? {cat:'projects',title:'FEEDBACK: Project explanation drill',dur:'1.5 hrs',tasks:['Feedback said you struggled to explain a project.','Pick the project mentioned and walk through it end-to-end.','"Walk me through your project" — time yourself.'],note:'Address the feedback directly.',isFeedback:true}
-      : null;
+  // NORMAL WEEKDAY
+  else if(dayType==='weekday'){
+    const sqlBlock={cat:'sql',title:'SQL: '+sq.t,dur:'45 min',tasks:['Topic '+(S.sqlIdx+1)+'/'+SQL.length+': '+sq.t,sq.d,'Write every query yourself. Aim under 10 min per problem.'],note:'SQL is tested hard in every India DA interview.'};
+    const pyBlock={cat:'python',title:'Python: '+py.t,dur:'1 hr',tasks:['Topic '+(S.pythonIdx+1)+'/'+PYTHON.length+': '+py.t,py.d,'Write code — 3 examples of your own.'],note:'Foundation. Every project you built runs on this.'};
+    const gapBlock=gap==='sql'?Object.assign({},sqlBlock,{title:'SQL PRIORITY (feedback gap): '+sq.t,dur:'1.5 hrs',note:'Feedback flagged this. Extra time allocated.',isFeedback:true}):
+      gap==='projects'?{cat:'projects',title:'FEEDBACK: Project explanation drill',dur:'1.5 hrs',tasks:['Feedback said you struggled explaining a project.','Walk through the project mentioned end-to-end.','"Walk me through your project" — time yourself.'],note:'Address the feedback directly.',isFeedback:true}:null;
 
-    blocks = [
-      showAudit ? {cat:'linkedin-audit',title:'LinkedIn Profile Audit (one-time, week 1)',dur:'45 min',tasks:['Headline: "Data Analyst | Python · SQL · XGBoost · Tableau · Power BI"','Add all 11 projects to Featured with live Streamlit links','Update skills — every library in your tech stack','Turn on Open to Work for recruiters only'],note:'Do once. Strong profile gets inbound from recruiters.'} : null,
-      {cat:'us-apps',title:'US Job Applications — early morning',dur:'1.5 hrs',tasks:['Target: 8–10 applications. Semi-tailored — tweak 2–3 bullets per role.','Platforms: LinkedIn (posted today), Greenhouse, Lever, Wellfound','Priority: Sportradar, Stats Perform, Riot Games, Spotify, Expedia','Log every application: company, role, date, platform, status.'],note:'Apply first. Early applicants get seen. This is the edge.'},
-      {cat:'linkedin',title:'LinkedIn Recruiter Connections',dur:'30 min',tasks:['Connect with 5–10 hiring managers or DA/DS recruiters.','Message: 1 sentence background + 1 sentence why their company + ask for 15 min.','Never send blank connection requests.'],note:'5 connects/day = 35/week = compounding pipeline.'},
-      gapBlock || pyBlock,
-      {cat:'projects',title:'Project deep-dive: ' + projH.n,dur:'1.5 hrs',tasks:['Open: github.com/anirudh-rs/' + projH.n,'Know cold: ' + projH.tags.join(', '),'"Walk me through this project" — 5-sentence answer.','"Why did you choose X over Y?" — every major decision.','"What would you do differently?" — honest answer.'],note:'Heavy hitter. Know this cold before any interview.'},
-      gapBlock ? pyBlock : sqlBlock,
-      {cat:'india-apps',title:'India Job Applications',dur:'1 hr',tasks:['Target: 15–20 on Naukri, LinkedIn, AngelList India.','Mix: quick-apply for volume + semi-tailored for Dream11, Flipkart, MakeMyTrip.','Reference your GitHub in every application.','Follow up on applications sent 5+ days ago.'],note:'India hiring moves fast. Follow up within 48 hours.'},
-      {cat:'india-network',title:'India Networking — referral outreach',dur:'20 min',tasks:['Message 3–4 college connections or Indian DA/DS professionals.','Ask for a referral or intro call — not a job directly.','1 referral/week dramatically increases India response rate.'],note:'Referrals bypass the ATS filter.'},
-      {cat:'interview',title:'Interview Prep: ' + prep.t,dur:prepDur(week,false),tasks:[prep.d,'Week ' + week + '/8 — ' + (week<=2?'building foundations':week<=4?'getting sharper':week<=6?'interview-ready':'final polish')],note:'Week ' + week + ': ' + (week<=2?'Start now even if no calls yet.':week<=4?'Keep drilling. Calls should be coming.':week<=6?'You should be getting interviews.':'Final stretch.')},
-      {cat:'stats',title:'Stats: ' + st.t,dur:'30 min',tasks:[st.d,'Connect to one of your 11 projects explicitly.','Plain-English explanation — as if for a non-technical manager.'],note:'This separates DA from DA who can answer "why".'},
+    blocks=[
+      showAudit?{cat:'linkedin-audit',title:'LinkedIn Profile Audit (one-time, Week 1)',dur:'45 min',tasks:['Headline: "Data Analyst | Python · SQL · XGBoost · Tableau · Power BI"','Add all 11 projects to Featured with live Streamlit links','Update skills — every library in your tech stack','Turn on Open to Work for recruiters'],note:'Do this once. A strong profile gets inbound from recruiters.'}:null,
+      {cat:'india-apps',title:'India Job Applications — morning priority',dur:'1.5 hrs',tasks:['Target: 10–15 applications on Naukri, LinkedIn, AngelList India.','Mix: quick-apply for volume + semi-tailored for Dream11, Flipkart, MakeMyTrip, Meesho.','Tweak 2–3 resume bullets per role. Reference your GitHub.','Log every application: company, role, date, platform, status.','Follow up on applications sent 5+ days ago.'],note:'India first. Apply early — postings fill fast.'},
+      {cat:'linkedin',title:'LinkedIn Recruiter Connections',dur:'30 min',tasks:['Connect with 5–10 DA/DS hiring managers or recruiters at target India companies.','Message: 1 sentence background + 1 sentence why their company + ask for 15 min.','Never send blank connection requests.'],note:'5 connects/day = 35/week. Compounding pipeline.'},
+      gapBlock||pyBlock,
+      {cat:'projects',title:'Project deep-dive: '+projH.n,dur:'1.5 hrs',tasks:['Open: github.com/anirudh-rs/'+projH.n,'Know cold: '+projH.tags.join(', '),'"Walk me through this project" — write 5-sentence answer.','"Why did you choose X over Y?" — every major decision.','"What would you do differently?" — honest answer.'],note:'Heavy hitter. Know this cold before any interview.'},
+      gapBlock?pyBlock:sqlBlock,
+      {cat:'india-network',title:'India Networking — referral outreach',dur:'20 min',tasks:['Message 3–4 college connections or Indian DA/DS professionals.','Ask for a referral or intro call — not a job directly.','Even 1 referral/week dramatically increases response rate.'],note:'Referrals bypass the ATS filter. This is how India hiring works.'},
+      {cat:'interview',title:'Interview Prep: '+prep.t,dur:prepDur(week,false),tasks:[prep.d,'Week '+week+'/8 — '+(week<=2?'building foundations':week<=4?'getting sharper':week<=6?'interview-ready':'final polish')],note:'Week '+week+': '+(week<=2?'Start now even if no calls yet.':week<=4?'Keep drilling. Calls should be coming.':week<=6?'You should be getting interviews.':'Final stretch.')},
+      {cat:'stats',title:'Stats: '+st.t,dur:'30 min',tasks:[st.d,'Connect to one of your 11 projects explicitly.','Plain-English explanation — as if for a non-technical manager.'],note:'This separates DA from DA who can answer "why".'},
+      {cat:'us-apps',title:'US Remote Applications (secondary)',dur:'30 min',tasks:['Target: 3–5 remote-friendly US DA/DS roles.','Platforms: LinkedIn remote filter, Wellfound, Greenhouse.','Only if time permits — India is priority.'],note:'Secondary — never skip India blocks for this.'},
     ].filter(Boolean);
   }
 
-  // ── SATURDAY ─────────────────────────────────────────
-  else if (dayType === 'saturday') {
-    blocks = [
-      {cat:'us-apps',title:'US Applications — Saturday push',dur:'1.5 hrs',tasks:['Target: 8–10. Fewer competitors today.','Focus on your A-list: Riot Games, Spotify, Expedia, Nielsen.','Follow up on applications from 5+ days ago.'],note:'Saturday postings are lower competition.'},
-      {cat:'india-apps',title:'India Applications',dur:'1 hr',tasks:['Target: 15 on Naukri + LinkedIn.','Check for new Friday postings.'],note:''},
-      {cat:'projects',title:'Deep-dive: ' + projH.n + ' (extended)',dur:'2 hrs',tasks:['github.com/anirudh-rs/' + projH.n,'Full tech: ' + projH.tags.join(', '),'Understand every library call under the hood.','Mock interview yourself for 15 min. Record it.','3 interview questions this project generates — answer all.'],note:'Saturday is for going deep. No rushing.'},
-      {cat:'projects',title:'Light review: ' + projL.n,dur:'45 min',tasks:['github.com/anirudh-rs/' + projL.n,'Key: ' + projL.tags.slice(0,3).join(', '),'3-sentence business problem — say it out loud.'],note:'Keep all 11 warm. Rotate each Saturday.'},
-      {cat:'linkedin',title:'LinkedIn & Networking — batch session',dur:'30 min',tasks:['10 recruiter connections with personalised notes.','3–4 India referral messages.','Engage with 3 posts from target companies — comment thoughtfully.'],note:'Weekend LinkedIn stands out.'},
-      {cat:'bi',title:bi.tool + ': ' + bi.t,dur:'1 hr',tasks:['Topic ' + (S.biIdx+1) + '/' + BI.length + ': ' + bi.t, bi.d, bi.tool==='Power BI'?'Power BI in 70% of India DA JDs. Treat as seriously as SQL.':'Your Tableau is strong. Go deeper.'],note:''},
-      {cat:'interview',title:'Interview Prep: ' + prep.t,dur:prepDur(week,false),tasks:[prep.d,'Practice until it flows — not memorised, natural.'],note:''},
+  // SATURDAY
+  else if(dayType==='saturday'){
+    blocks=[
+      {cat:'india-apps',title:'India Applications — Saturday push',dur:'1.5 hrs',tasks:['Target: 10–15. Fewer competitors on weekends.','Focus on Dream11, Flipkart, MakeMyTrip, Meesho, Nykaa, JioSaavn.','Follow up on applications from 5+ days ago.'],note:'Weekend applications stand out.'},
+      {cat:'projects',title:'Deep-dive: '+projH.n+' (extended)',dur:'2 hrs',tasks:['github.com/anirudh-rs/'+projH.n,'Full tech: '+projH.tags.join(', '),'Understand every library call under the hood.','Mock interview yourself for 15 min. Record it.','3 interview questions this project generates — answer them all.'],note:'Saturday is for going deep. No rushing.'},
+      {cat:'projects',title:'Light review: '+projL.n,dur:'45 min',tasks:['github.com/anirudh-rs/'+projL.n,'Key: '+projL.tags.slice(0,3).join(', '),'3-sentence business problem — say it out loud.','Most interesting finding — say it naturally.'],note:'Keep all 11 warm. Rotate each Saturday.'},
+      {cat:'linkedin',title:'LinkedIn & Networking — batch session',dur:'30 min',tasks:['10 recruiter connections with personalised notes.','3–4 referral messages to Indian connections.','Comment on 3 posts from target companies.'],note:'Weekend LinkedIn activity stands out.'},
+      {cat:'bi',title:bi.tool+': '+bi.t,dur:'1 hr',tasks:['Topic '+(S.biIdx+1)+'/'+BI.length+': '+bi.t,bi.d,bi.tool==='Power BI'?'Power BI is in 70% of India DA JDs. Treat as seriously as SQL.':'Your Tableau is strong. Go deeper.'],note:''},
+      {cat:'interview',title:'Interview Prep: '+prep.t,dur:prepDur(week,false),tasks:[prep.d,'Practice until it flows — not memorised, natural.'],note:''},
     ];
   }
 
-  // ── SUNDAY ───────────────────────────────────────────
-  else {
-    blocks = [
-      {cat:'weekly-review',title:'Weekly Review',dur:'30 min',tasks:['Count total US + India applications this week. On track?','Which platforms gave responses?','What did you skip? Is it a pattern?','Set 3 focus goals for next week.','Update your Excel tracker.'],note:'30 minutes of review saves days of wasted effort.'},
-      {cat:'us-apps',title:'US Applications + Follow-ups',dur:'1 hr',tasks:['Apply to 5–8 US roles.','Follow up on all applications sent 5–7 days ago.','Research 3 target companies for next week.'],note:'Sunday follow-ups land Monday morning. Strong timing.'},
-      {cat:'india-apps',title:'India Applications',dur:'45 min',tasks:['Apply to 10 India roles.','Message 2–3 connections for referrals.'],note:''},
-      {cat:'python',title:'Python review: ' + py.t,dur:'1 hr',tasks:['Revisit topic ' + (S.pythonIdx+1) + '/' + PYTHON.length, py.d,'Read through one notebook and annotate what each line does.','Build one small exercise connecting to a real project.'],note:'Sundays: consolidation, not new content.'},
-      {cat:'projects',title:'Light review: ' + projL.n,dur:'30 min',tasks:['github.com/anirudh-rs/' + projL.n,'Focus on: ' + projL.tags.slice(0,2).join(' and '),'3-sentence explanation — without looking.'],note:''},
-      {cat:'interview',title:'Interview Prep: ' + prep.t,dur:prepDur(week,false),tasks:[prep.d,'Lighter touch today — watch a video if drilling feels heavy.','Write 2 things you understand now that you didn\'t last week.'],note:''},
+  // SUNDAY
+  else{
+    blocks=[
+      {cat:'weekly-review',title:'Weekly Review',dur:'30 min',tasks:['Count total India applications this week. On track for 60–80?','Which platforms gave responses?','What did you skip? Is it becoming a pattern?','Set 3 focus goals for next week.','Update your Excel tracker.'],note:'30 minutes of review saves days of wasted effort.'},
+      {cat:'india-apps',title:'India Applications + Follow-ups',dur:'1 hr',tasks:['Apply to 8–10 India roles.','Follow up on all applications sent 5–7 days ago.','Research 3 target companies for next week.'],note:'Sunday follow-ups land Monday morning.'},
+      {cat:'python',title:'Python review: '+py.t,dur:'1 hr',tasks:['Revisit topic '+(S.pythonIdx+1)+'/'+PYTHON.length,py.d,'Read through one notebook from any project and annotate what each line does.','Build one small exercise connecting to a real project.'],note:'Sundays: consolidation, not new content.'},
+      {cat:'projects',title:'Light review: '+projL.n,dur:'30 min',tasks:['github.com/anirudh-rs/'+projL.n,'Focus on: '+projL.tags.slice(0,2).join(' and '),'3-sentence explanation — without looking.'],note:'Keep all 11 warm.'},
+      {cat:'interview',title:'Interview Prep: '+prep.t,dur:prepDur(week,false),tasks:[prep.d,'Lighter touch today — watch a video if drilling feels heavy.','Write 2 things you understand now that you didn\'t last week.'],note:''},
+      {cat:'linkedin',title:'India Networking — batch messages',dur:'20 min',tasks:['Message 3–4 connections for referrals or intros.','Reply to any connection requests you haven\'t responded to.'],note:''},
     ];
   }
 
-  return { blocks, week, intense, burnout, assessment };
+  return{blocks,week,intense,burnout,asmt};
 }
 
 // ═══════════════════════════════════════════════════════
 // RENDER
 // ═══════════════════════════════════════════════════════
-const TAG_LABELS = {'us-apps':'US Apps','india-apps':'India Apps','linkedin':'LinkedIn','india-network':'India Network','python':'Python','sql':'SQL','projects':'Project','stats':'Stats','bi':'BI Tools','interview':'Interview Prep','assessment':'Assessment','weekly-review':'Weekly Review','linkedin-audit':'LinkedIn Audit','recovery':'Recovery'};
+const TAG_LABELS={'india-apps':'India Apps','us-apps':'US Remote','linkedin':'LinkedIn','india-network':'Network','python':'Python','sql':'SQL','projects':'Project','stats':'Stats','bi':'BI Tools','interview':'Interview Prep','assessment':'Assessment','weekly-review':'Weekly Review','linkedin-audit':'LinkedIn Audit','recovery':'Recovery'};
 
-function renderSchedule(data) {
-  const { blocks, week, intense, burnout, assessment } = data;
-  schedule = blocks.map((b,i) => Object.assign({}, b, {id:i, done:false}));
+function renderSchedule(data){
+  const{blocks,week,intense,burnout,asmt}=data;
+  schedule=blocks.map((b,i)=>Object.assign({},b,{id:i,done:false}));
 
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const now = new Date();
-  document.getElementById('sched-date').textContent = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate();
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const now=new Date();
+  document.getElementById('sched-date').textContent=days[now.getDay()]+', '+months[now.getMonth()]+' '+now.getDate();
+  const hrs=currentDay==='weekday'?'~8 hrs':currentDay==='saturday'?'~7 hrs':'~4 hrs';
+  document.getElementById('sched-meta').innerHTML=currentDay.toUpperCase()+' · WEEK '+week+'/8<br>'+hrs+(burnout?' · RECOVERY':'')+(asmt?' · ASSESSMENT':'');
 
-  const hrs = currentDay==='weekday'?'~8 hrs':currentDay==='saturday'?'~7 hrs':'~4.5 hrs';
-  document.getElementById('sched-meta').innerHTML = currentDay.toUpperCase() + ' · WEEK ' + week + '/8<br>' + hrs + (burnout?' · RECOVERY':'') + (assessment?' · ASSESSMENT':'');
+  if(intense&&!burnout&&!asmt) showBanner('interview-banner'); else hideBanner('interview-banner');
+  if(burnout) showBanner('burnout-banner'); else hideBanner('burnout-banner');
+  if(asmt) updateAsmtBanner(); else hideBanner('assessment-banner');
+  if(S.overrideText){document.getElementById('override-banner-text').textContent='⚡ Override: '+S.overrideText;showBanner('override-banner');}else hideBanner('override-banner');
 
-  // banners
-  if (intense && !burnout && !assessment) showBanner('interview-banner'); else hideBanner('interview-banner');
-  if (burnout) showBanner('burnout-banner'); else hideBanner('burnout-banner');
-  if (assessment) updateAssessmentBanner(); else hideBanner('assessment-banner');
-  if (S.overrideText) { document.getElementById('override-banner-text').textContent = '⚡ Override: ' + S.overrideText; showBanner('override-banner'); } else hideBanner('override-banner');
-
-  let html = '';
-  schedule.forEach((b,i) => {
-    const tl = TAG_LABELS[b.cat] || b.cat;
-    html += `<div class="block" data-cat="${b.cat}" id="block-${i}">
+  let html='';
+  schedule.forEach((b,i)=>{
+    const tl=TAG_LABELS[b.cat]||b.cat;
+    html+=`<div class="block" data-cat="${b.cat}" id="block-${i}">
       <div class="block-top">
         <div class="block-title">${b.title}${b.intense?'<span class="badge badge-intense">INTENSE</span>':''}${b.isOverride?'<span class="badge badge-override">OVERRIDE</span>':''}${b.isFeedback?'<span class="badge badge-feedback">FEEDBACK GAP</span>':''}</div>
         <div class="block-right">
@@ -995,193 +906,148 @@ function renderSchedule(data) {
       ${b.note?`<div class="block-note">${b.note}</div>`:''}
     </div>`;
   });
-  document.getElementById('blocks-container').innerHTML = html;
+  document.getElementById('blocks-container').innerHTML=html;
   updateProgress();
 
-  const sch = document.getElementById('schedule');
-  sch.style.display = 'block';
+  const sch=document.getElementById('schedule');
+  sch.style.display='block';
   sch.classList.add('show');
-  setTimeout(() => sch.scrollIntoView({ behavior:'smooth', block:'start' }), 100);
+  setTimeout(()=>sch.scrollIntoView({behavior:'smooth',block:'start'}),100);
 }
 
-function toggleBlock(i) {
-  schedule[i].done = !schedule[i].done;
-  document.getElementById('block-' + i).classList.toggle('done', schedule[i].done);
-  document.getElementById('check-' + i).classList.toggle('checked', schedule[i].done);
-  if (!schedule[i].done) recordSkip(schedule[i].cat);
+function toggleBlock(i){
+  schedule[i].done=!schedule[i].done;
+  document.getElementById('block-'+i).classList.toggle('done',schedule[i].done);
+  document.getElementById('check-'+i).classList.toggle('checked',schedule[i].done);
+  if(!schedule[i].done) recordSkip(schedule[i].cat);
   updateProgress();
 }
-
-function updateProgress() {
-  const total = schedule.length;
-  const done = schedule.filter(b => b.done).length;
-  const pct = total > 0 ? (done / total) * 100 : 0;
-  document.getElementById('prog-fill').style.width = pct + '%';
-  document.getElementById('prog-text').textContent = done + ' / ' + total + ' blocks';
+function updateProgress(){
+  const total=schedule.length;
+  const done=schedule.filter(b=>b.done).length;
+  const pct=total>0?(done/total)*100:0;
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-text').textContent=done+' / '+total+' blocks';
 }
 
 // ═══════════════════════════════════════════════════════
 // GENERATE
 // ═══════════════════════════════════════════════════════
-function generate() {
-  const btn = document.getElementById('gen-btn');
+function generate(){
+  const btn=document.getElementById('gen-btn');
   btn.classList.add('loading');
-  btn.innerHTML = '<span class="spin"></span>Building...';
-  S.overrideText = '';
-  hideBanner('override-banner');
+  btn.innerHTML='<span class="spin"></span>Building...';
+  S.overrideText=''; hideBanner('override-banner');
 
-  setTimeout(() => {
-    const data = buildSchedule(currentDay);
+  setTimeout(()=>{
+    const data=buildSchedule(currentDay);
     renderSchedule(data);
-    S.pythonIdx = (S.pythonIdx + 1) % PYTHON.length;
-    S.sqlIdx = (S.sqlIdx + 1) % SQL.length;
-    S.biIdx = (S.biIdx + 1) % BI.length;
-    S.statsIdx = (S.statsIdx + 1) % STATS.length;
-    S.currentWeek = parseInt(document.getElementById('week-sel').value) || S.currentWeek;
-    if (S.tomorrowAlert) S.tomorrowAlert = null;
+    S.pythonIdx=(S.pythonIdx+1)%PYTHON.length;
+    S.sqlIdx=(S.sqlIdx+1)%SQL.length;
+    S.biIdx=(S.biIdx+1)%BI.length;
+    S.statsIdx=(S.statsIdx+1)%STATS.length;
+    S.currentWeek=parseInt(document.getElementById('week-sel').value)||S.currentWeek;
+    if(S.tomorrowAlert) S.tomorrowAlert=null;
     save();
     btn.classList.remove('loading');
-    btn.innerHTML = 'Generate';
-    document.getElementById('trigger-input').value = '';
-  }, 700);
+    btn.innerHTML='Generate';
+    document.getElementById('trigger-input').value='';
+  },700);
 }
 
 // ═══════════════════════════════════════════════════════
-// EOD SAVE — fixed
+// EOD SAVE
 // ═══════════════════════════════════════════════════════
-function saveEOD() {
-  const note = document.getElementById('eod-note').value.trim();
-  const feedback = document.getElementById('eod-feedback').value.trim();
-  const us = parseInt(document.getElementById('eod-us').value) || 0;
-  const india = parseInt(document.getElementById('eod-india').value) || 0;
-  const li = parseInt(document.getElementById('eod-li').value) || 0;
+function saveEOD(){
+  const note=document.getElementById('eod-note').value.trim();
+  const feedback=document.getElementById('eod-feedback').value.trim();
+  const india=parseInt(document.getElementById('eod-india').value)||0;
+  const us=parseInt(document.getElementById('eod-us').value)||0;
+  const li=parseInt(document.getElementById('eod-li').value)||0;
 
-  // update weekly stats
-  S.weeklyStats.usApps += us;
-  S.weeklyStats.indiaApps += india;
-  S.weeklyStats.liConnects += li;
+  S.weeklyStats.indiaApps+=india;
+  S.weeklyStats.usApps+=us;
+  S.weeklyStats.liConnects+=li;
 
-  // detect flags
-  if (note && detectBurnout(note)) S.burnoutMode = true;
-  if (feedback) S.lastFeedback = feedback;
-  if (note && (note.toLowerCase().includes('linkedin audit')||note.toLowerCase().includes('audit done'))) S.linkedInAuditDone = true;
+  if(note&&detectBurnout(note)) S.burnoutMode=true;
+  if(feedback) S.lastFeedback=feedback;
+  if(note&&(note.toLowerCase().includes('linkedin audit')||note.toLowerCase().includes('audit done'))) S.linkedInAuditDone=true;
 
-  // skip detection from text
-  const skipWords = ['skipped','didn\'t do','missed','no time for','didn\'t touch'];
-  ['india-network','stats','bi','sql','python'].forEach(cat => {
-    const label = cat.replace(/-/g,' ');
-    if (skipWords.some(w => note.toLowerCase().includes(w) && note.toLowerCase().includes(label))) {
-      recordSkip(cat);
-    }
+  const skipWords=["skipped","didn't do","missed","no time for","didn't touch"];
+  ['india-network','stats','bi','sql','python'].forEach(cat=>{
+    const label=cat.replace(/-/g,' ');
+    if(note&&skipWords.some(w=>note.toLowerCase().includes(w)&&note.toLowerCase().includes(label))) recordSkip(cat);
   });
 
-  // save EOD history
-  S.eodHistory.push({
-    date: new Date().toISOString(),
-    note: note || '',
-    feedback: feedback || '',
-    us, india, li
-  });
-  if (S.eodHistory.length > 60) S.eodHistory = S.eodHistory.slice(-60);
+  S.eodHistory.push({date:new Date().toISOString(),note:note||'',feedback:feedback||'',india,us,li});
+  if(S.eodHistory.length>60) S.eodHistory=S.eodHistory.slice(-60);
 
   save();
   updateWeeklyStats();
 
-  // show confirmation — the fixed part
-  const confirmEl = document.getElementById('eod-confirm');
-  confirmEl.style.display = 'inline';
-  setTimeout(() => { confirmEl.style.display = 'none'; }, 4000);
+  // show confirmation
+  const el=document.getElementById('eod-confirm');
+  el.style.display='inline';
+  setTimeout(()=>{ el.style.display='none'; },4000);
 
-  // clear inputs
-  document.getElementById('eod-note').value = '';
-  document.getElementById('eod-feedback').value = '';
-  document.getElementById('eod-us').value = '';
-  document.getElementById('eod-india').value = '';
-  document.getElementById('eod-li').value = '';
-  document.getElementById('eod-blocks').value = '';
+  // clear fields
+  document.getElementById('eod-note').value='';
+  document.getElementById('eod-feedback').value='';
+  document.getElementById('eod-india').value='';
+  document.getElementById('eod-us').value='';
+  document.getElementById('eod-li').value='';
 }
 
-function appendEOD(text) {
-  const ta = document.getElementById('eod-note');
-  ta.value += (ta.value && !ta.value.endsWith(' ') ? '\n' : '') + text;
+function appendEOD(text){
+  const ta=document.getElementById('eod-note');
+  ta.value+=(ta.value&&!ta.value.endsWith(' ')?'\n':'')+text;
   ta.focus();
 }
 
 // ═══════════════════════════════════════════════════════
-// STATS & COUNTDOWN
+// STATS
 // ═══════════════════════════════════════════════════════
-function updateWeeklyStats() {
-  document.getElementById('w-us').textContent = S.weeklyStats.usApps;
-  document.getElementById('w-india').textContent = S.weeklyStats.indiaApps;
-  document.getElementById('w-li').textContent = S.weeklyStats.liConnects;
+function updateWeeklyStats(){
+  document.getElementById('w-india').textContent=S.weeklyStats.indiaApps;
+  document.getElementById('w-us').textContent=S.weeklyStats.usApps;
+  document.getElementById('w-li').textContent=S.weeklyStats.liConnects;
+  const week=parseInt(document.getElementById('week-sel').value)||S.currentWeek;
+  document.getElementById('w-week').textContent='W'+week;
 
-  const week = parseInt(document.getElementById('week-sel').value) || S.currentWeek;
-  document.getElementById('w-week').textContent = 'W' + week;
+  const pct=Math.min(Math.round((S.weeklyStats.indiaApps/70)*100),100);
+  const pf=document.getElementById('pace-fill');
+  pf.style.width=pct+'%';
+  pf.className='pace-fill'+(pct>=100?' good':pct>=70?' ok':'');
+  document.getElementById('pace-pct').textContent=pct+'%';
 
-  const pct = Math.min(Math.round((S.weeklyStats.usApps / 63) * 100), 100);
-  const pf = document.getElementById('pace-fill');
-  pf.style.width = pct + '%';
-  pf.className = 'pace-fill ' + (pct >= 100 ? 'good' : pct >= 70 ? 'ok' : '');
-  document.getElementById('pace-pct').textContent = pct + '%';
-
-  const usEl = document.getElementById('w-us');
-  usEl.className = 'wstat-val ' + (S.weeklyStats.usApps >= 63 ? 'c-green' : S.weeklyStats.usApps >= 40 ? 'c-yellow' : 'c-red');
-
-  // countdown — 61 days from startDate
-  const start = new Date(S.startDate);
-  const deadline = new Date(start);
-  deadline.setDate(deadline.getDate() + 61);
-  const daysLeft = Math.max(0, Math.ceil((deadline - new Date()) / (1000*60*60*24)));
-  document.getElementById('days-left').textContent = daysLeft;
+  const el=document.getElementById('w-india');
+  el.className='wstat-val '+(S.weeklyStats.indiaApps>=70?'c-green':S.weeklyStats.indiaApps>=40?'c-yellow':'c-red');
 }
 
-function setWeek(w) {
-  S.currentWeek = parseInt(w);
-  save();
-  updateWeeklyStats();
-}
-
-// ═══════════════════════════════════════════════════════
-// RESET CLOCK
-// ═══════════════════════════════════════════════════════
-function resetClock() {
-  if (!confirm('Reset the 61-day countdown to start from tomorrow? Curriculum progress, EOD history and application data will be kept.')) return;
-  S.startDate = makeStartDate();
-  S.currentWeek = 1;
-  S.weeklyStats = { usApps:0, indiaApps:0, liConnects:0, weekStart: S.startDate };
-  document.getElementById('week-sel').value = 1;
-  save();
-  updateWeeklyStats();
-  alert('Clock reset! 61 days starting from tomorrow.');
-}
+function setWeek(w){ S.currentWeek=parseInt(w); save(); updateWeeklyStats(); }
 
 // ═══════════════════════════════════════════════════════
 // EXPORT / IMPORT
 // ═══════════════════════════════════════════════════════
-function exportData() {
-  const blob = new Blob([JSON.stringify(S, null, 2)], { type:'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'mission-control-' + new Date().toISOString().split('T')[0] + '.json';
+function exportData(){
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='mission-control-'+new Date().toISOString().split('T')[0]+'.json';
   a.click();
   URL.revokeObjectURL(url);
 }
-
-function importData(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    try {
-      S = Object.assign({}, DEFAULT, JSON.parse(ev.target.result));
-      save();
-      refreshUI();
+function importData(e){
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      S=Object.assign({},DEFAULT,JSON.parse(ev.target.result));
+      save(); refreshUI();
       document.getElementById('import-overlay').classList.remove('open');
       alert('Progress restored!');
-    } catch(err) {
-      alert('Invalid file.');
-    }
+    }catch(err){ alert('Invalid file.'); }
   };
   reader.readAsText(file);
 }
@@ -1189,49 +1055,50 @@ function importData(e) {
 // ═══════════════════════════════════════════════════════
 // BANNER HELPERS
 // ═══════════════════════════════════════════════════════
-function showBanner(id) { document.getElementById(id).classList.add('show'); }
-function hideBanner(id) { document.getElementById(id).classList.remove('show'); }
-function showEl(id, cls) { const el = document.getElementById(id); el.className = 'sit-confirm show ' + cls; }
-function hideEl(id) { document.getElementById(id).classList.remove('show'); }
+function showBanner(id){ document.getElementById(id).classList.add('show'); }
+function hideBanner(id){ document.getElementById(id).classList.remove('show'); }
+function showConfirm(id,cls){
+  const el=document.getElementById(id);
+  el.className='sit-confirm show '+cls;
+  setTimeout(()=>{ el.className='sit-confirm'; },3000);
+}
 
 // ═══════════════════════════════════════════════════════
-// WEEKLY RESET CHECK
+// WEEKLY RESET
 // ═══════════════════════════════════════════════════════
-function checkWeekReset() {
-  const now = new Date();
-  const ws = new Date(S.weeklyStats.weekStart || S.startDate);
-  const diff = Math.floor((now - ws) / (1000*60*60*24));
-  if (diff >= 7) {
-    S.weeklyStats = { usApps:0, indiaApps:0, liConnects:0, weekStart: now.toISOString().split('T')[0] };
-    S.currentWeek = Math.min(S.currentWeek + 1, 8);
-    S.skipCounts = {};
-    document.getElementById('week-sel').value = S.currentWeek;
+function checkWeekReset(){
+  const now=new Date();
+  const ws=new Date(S.weeklyStats.weekStart||now.toISOString().split('T')[0]);
+  if(Math.floor((now-ws)/(1000*60*60*24))>=7){
+    S.weeklyStats={indiaApps:0,usApps:0,liConnects:0,weekStart:now.toISOString().split('T')[0]};
+    S.currentWeek=Math.min(S.currentWeek+1,8);
+    S.skipCounts={};
+    document.getElementById('week-sel').value=S.currentWeek;
     save();
   }
 }
 
-function refreshUI() {
-  document.getElementById('week-sel').value = S.currentWeek;
+function refreshUI(){
+  document.getElementById('week-sel').value=S.currentWeek;
   updateWeeklyStats();
-  if (S.assessmentMode) updateAssessmentBanner();
-  if (S.burnoutMode) showBanner('burnout-banner');
+  if(S.assessmentMode) updateAsmtBanner();
+  if(S.burnoutMode) showBanner('burnout-banner');
 }
 
 // ═══════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════
-document.querySelectorAll('.day-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+document.querySelectorAll('.day-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    currentDay = btn.dataset.day;
+    currentDay=btn.dataset.day;
   });
 });
-
-document.getElementById('trigger-input').addEventListener('keydown', e => { if (e.key === 'Enter') generate(); });
-document.getElementById('gen-btn').addEventListener('click', generate);
-document.getElementById('override-input').addEventListener('keydown', e => { if (e.key === 'Enter') applyOverride(); });
-document.getElementById('eod-save-btn').addEventListener('click', saveEOD);
+document.getElementById('trigger-input').addEventListener('keydown',e=>{ if(e.key==='Enter') generate(); });
+document.getElementById('gen-btn').addEventListener('click',generate);
+document.getElementById('override-input').addEventListener('keydown',e=>{ if(e.key==='Enter') applyOverride(); });
+document.getElementById('eod-save-btn').addEventListener('click',saveEOD);
 
 checkWeekReset();
 refreshUI();
